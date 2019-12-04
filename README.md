@@ -7,7 +7,7 @@ Download gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 from
 https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
 
 ```
-apt-get -f install -y build-essential autoconf autogen bison dejagnu flex flip gawk git gperf gzip nsis openssh-client p7zip-full perl python-dev libisl-dev scons tcl texinfo tofrodos wget zip texlive texlive-extra-utils libncurses5-dev
+apt-get -f install -y build-essential autoconf autogen bison dejagnu flex flip gawk git gperf gzip nsis openssh-client p7zip-full perl python-dev libisl-dev scons tcl texinfo tofrodos wget zip texlive texlive-plain-generic texlive-extra-utils libncurses5-dev
 
 mkdir ~/toolchain
 cd toolchain/
