@@ -2,11 +2,7 @@
 
 This is a build of an arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
-In stm32 platform.txt change 
-```
--compiler.path={runtime.tools.arm-none-eabi-gcc-8.3.1-1.3.path}/bin/
-+compiler.path={runtime.tools.arm-none-eabi-gcc-9.2.1.path}/bin/
-```
+[Download](https://github.com/koendv/stm32duino-raspberrypi/releases/tag/v1.3.1-0)
 # Build notes
 ## arm-none-eabi toolchain
 Download gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 from
