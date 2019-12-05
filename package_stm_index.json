@@ -882,7 +882,7 @@
             {
               "packager": "STM32",
               "name": "arm-none-eabi-gcc",
-              "version": "8.2.1-1.7"
+              "version": "9.2.1"
             },
             {
               "packager": "STM32",
@@ -898,6 +898,20 @@
         }
       ],
       "tools": [
+        {
+          "name": "arm-none-eabi-gcc",
+          "version": "9.2.1",
+          "systems":
+          [
+            {
+              "host": "armv7l-linux-gnu",
+              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/v1.3.1-0/gcc-arm-none-eabi-9.2.1-armv7l-linux.tar.bz2",
+              "archiveFileName": "gcc-arm-none-eabi-9.2.1-raspberrypi32.tar.bz2",
+              "checksum": "SHA-256:146de6b874380bf1bee6a71f03d44edcc4becc9d1f056e4dc73712dca8263061",
+              "size": "94845740"
+            }
+          ]
+        },
         {
           "name": "arm-none-eabi-gcc",
           "version": "8.2.1-1.7",
@@ -1462,6 +1476,13 @@
               "archiveFileName": "STM32Tools-1.3.1-linux.tar.bz2",
               "checksum": "SHA-256:82088da960965fe982510fca85993b098246932a53d27afd2f87fe912f323ff3",
               "size": "1005934"
+            },
+            {
+              "host": "armv7l-linux-gnu",
+              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/v1.3.1-0/STM32Tools-1.3.1-armv7l-linux-gnu.tar.bz2",
+              "archiveFileName": "STM32Tools-1.3.1-armv7l-linux-gnu.tar.bz2",
+              "checksum": "SHA-256:b0afb075bf861710e639b239ae9f796de6db3e90a73716311ccfcfd48a4df4d7",
+              "size": "2666150"
             }
           ]
         }

@@ -2,6 +2,15 @@
 
 This is a build of an arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
+In arduino IDE -> File -> Preferences -> Additional Boards Manager URLs put:
+
+https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/package_stm_index.json
+
+In stm32 platform.txt change 
+```
+-compiler.path={runtime.tools.arm-none-eabi-gcc-8.3.1-1.3.path}/bin/
++compiler.path={runtime.tools.arm-none-eabi-gcc-9.2.1.path}/bin/
+```
 ## arm-none-eabi toolchain
 Download gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 from
 https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
@@ -31,11 +40,13 @@ In "build-common.sh" replace JOBS=`grep ^processor /proc/cpuinfo|wc -l` with JOB
      MD5="md5sum -b"
      PACKAGE_NAME_SUFFIX="${host_arch}-linux"
 ```
-
+Begin build:
 ```
 ./build-prerequisites.sh --skip_steps=mingw32
 ./build-toolchain.sh --build_type=native --skip_steps=mingw32,mingw32-gdb-with-python,howto,manual
 ```
+The build takes about 16.5 hours.
+
 ## STM32Tools
 
 Download STM32Tools-1.3.1-linux.tar.bz2 
