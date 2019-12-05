@@ -2,10 +2,6 @@
 
 This is a build of an arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
-In arduino IDE -> File -> Preferences -> Additional Boards Manager URLs put:
-
-https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/package_stm_index.json
-
 In stm32 platform.txt change 
 ```
 -compiler.path={runtime.tools.arm-none-eabi-gcc-8.3.1-1.3.path}/bin/
