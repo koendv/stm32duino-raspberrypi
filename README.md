@@ -15,12 +15,26 @@ mv ../gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 .
 tar -xjf gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2
 cd ./gcc-arm-none-eabi-9-2019-q4-major
 ./install-sources.sh 
-cd ../
+```
+In "build-common.sh" replace JOBS=`grep ^processor /proc/cpuinfo|wc -l` with JOBS=1, to avoid running out of memory.
+```
+--- build-common.sh.ORIG	2019-12-05 11:42:34.735262457 +0100
++++ build-common.sh	2019-12-05 11:42:10.175711531 +0100
+@@ -304,7 +304,8 @@
+     BUILD="$host_arch"-linux-gnu
+     HOST_NATIVE="$host_arch"-linux-gnu
+     READLINK=readlink
+-    JOBS=`grep ^processor /proc/cpuinfo|wc -l`
++    #JOBS=`grep ^processor /proc/cpuinfo|wc -l`
++    JOBS=1
+     GCC_CONFIG_OPTS_LCPP="--with-host-libstdcxx=-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm"
+     MD5="md5sum -b"
+     PACKAGE_NAME_SUFFIX="${host_arch}-linux"
+```
 
-In "build-common.sh" replace JOBS=`grep ^processor /proc/cpuinfo|wc -l` with JOBS=1
-
+```
 ./build-prerequisites.sh --skip_steps=mingw32
-./build-toolchain.sh --build_type=native --skip_steps=mingw32,mingw32-gdb-with-python,manual
+./build-toolchain.sh --build_type=native --skip_steps=mingw32,mingw32-gdb-with-python,howto,manual
 ```
 ## STM32Tools
 
@@ -65,7 +79,7 @@ Package everything in a tar archive:
 ```
 cd ../../../../../
 
-tar cvf STM32Tools-1.3.1-raspberrypi.tar ./STM32Tools
-bzip2 --best STM32Tools-1.3.1-raspberrypi.tar
+tar cvf STM32Tools-1.3.1-armv7l-linux-gnu.tar ./STM32Tools
+bzip2 --best STM32Tools-1.3.1-armv7l-linux-gnu.tar
 ```
 not truncated
