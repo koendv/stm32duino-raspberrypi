@@ -7,6 +7,7 @@ In stm32 platform.txt change
 -compiler.path={runtime.tools.arm-none-eabi-gcc-8.3.1-1.3.path}/bin/
 +compiler.path={runtime.tools.arm-none-eabi-gcc-9.2.1.path}/bin/
 ```
+# Build notes
 ## arm-none-eabi toolchain
 Download gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 from
 https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
