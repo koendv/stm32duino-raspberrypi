@@ -49,6 +49,7 @@ Download STM32Tools-1.3.1-linux.tar.bz2
 Download STM32_HID_Bootloader-2.2.2.tar.gz from https://github.com/Serasidis/STM32_HID_Bootloader/releases
 
 ```
+apt-get install pkg-config libusb-1.0-0-dev
 tar xvf ~/Downloads/STM32Tools-1.3.1-linux.tar.bz2
 
 cd STM32Tools/tools/
@@ -90,4 +91,6 @@ cd ../../../../../
 tar cvf STM32Tools-1.3.1-armv7l-linux-gnu.tar ./STM32Tools
 bzip2 --best STM32Tools-1.3.1-armv7l-linux-gnu.tar
 ```
+Running STM32Tools requires libusb-1.0.
+
 not truncated
