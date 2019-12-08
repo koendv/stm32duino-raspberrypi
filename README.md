@@ -1,9 +1,11 @@
 # stm32duino-raspberrypi
 
-This is a build of an arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
+This is a build of the gcc-arm-none-eabi  toolchain and STM32Tools  that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
 [Download](https://github.com/koendv/stm32duino-raspberrypi/releases/tag/v1.3.1-0)
 # Build notes
+This is a native build of the gcc-arm-none-eabi toolchain and STM32Tools on a raspberry pi 4, 4gb ram. The armv7l build has been made booting the raspberry in 32-bit mode using [2019-09-26-raspbian-buster-full](https://www.raspberrypi.org/downloads/raspbian/). The aarch64 build has been made booting the raspberry in 64-bit mode using [2019-11-30-OPENFANS-Debian-Buster-Desktop-Aarch64-ext4-v2019-2.0-U1-Release](https://github.com/openfans-community-offical/Debian-Pi-Aarch64).
+
 ## arm-none-eabi toolchain
 Download gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 from
 https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
@@ -38,12 +40,14 @@ Begin build:
 ./build-prerequisites.sh --skip_steps=mingw32
 ./build-toolchain.sh --build_type=native --skip_steps=mingw32,mingw32-gdb-with-python,howto,manual
 ```
-The build takes about 16.5 hours.
+The build takes about 16.5 hours using the internal sdcard. USB is faster than the internal sdcard, so you can speed up the build to about 10 hours by connecting USB storage, putting swap and build directories on the USB storage, and setting JOBS=2.
 
 ## STM32Tools
 
 Download STM32Tools-1.3.1-linux.tar.bz2 
+
 Download STM32_HID_Bootloader-2.2.2.tar.gz from https://github.com/Serasidis/STM32_HID_Bootloader/releases
+
 ```
 tar xvf ~/Downloads/STM32Tools-1.3.1-linux.tar.bz2
 
