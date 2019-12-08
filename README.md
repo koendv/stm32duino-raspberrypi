@@ -40,7 +40,7 @@ Begin build:
 ./build-prerequisites.sh --skip_steps=mingw32
 ./build-toolchain.sh --build_type=native --skip_steps=mingw32,mingw32-gdb-with-python,howto,manual
 ```
-The build takes about 16.5 hours using the internal sdcard. USB is faster than the internal sdcard, so you can speed up the build to about 10 hours by connecting USB storage, putting swap and build directories on the USB storage, and setting JOBS=2.
+The build takes about 16.5 hours using the internal sdcard. On raspberry pi 4, USB is faster than the internal sdcard, so you can speed up the build to about 10 hours by connecting USB storage, putting swap and build directories on USB storage, and setting JOBS=2.
 
 ## STM32Tools
 
