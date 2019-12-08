@@ -4,7 +4,7 @@ This is a build of the gcc-arm-none-eabi  toolchain with STM32Tools  that runs o
 
 [Download](https://github.com/koendv/stm32duino-raspberrypi/releases/tag/v1.3.1-0)
 # Build notes
-This is a native build of the gcc-arm-none-eabi toolchain and STM32Tools on a raspberry pi 4, 4gb ram. The armv7l build has been made booting the raspberry in 32-bit mode using [2019-09-26-raspbian-buster-full](https://www.raspberrypi.org/downloads/raspbian/). The aarch64 build has been made booting the raspberry in 64-bit mode using [2019-11-30-OPENFANS-Debian-Buster-Desktop-Aarch64-ext4-v2019-2.0-U1-Release](https://github.com/openfans-community-offical/Debian-Pi-Aarch64). Note the OpenFans 64-bit Debian for Raspberry uses the Chinese language by default. 
+This is a native build of the gcc-arm-none-eabi toolchain and STM32Tools on a raspberry pi 4, 4gb ram. The armv7l build has been made booting the raspberry in 32-bit mode using [2019-09-26-raspbian-buster-full](https://www.raspberrypi.org/downloads/raspbian/). The aarch64 build has been made booting the raspberry in 64-bit mode using [2019-11-30-OPENFANS-Debian-Buster-Desktop-Aarch64-ext4-v2019-2.0-U1-Release](https://github.com/openfans-community-offical/Debian-Pi-Aarch64). Note the OpenFans 64-bit Debian for Raspberry uses the Chinese language by default; your preferences may differ. 
 
 ## arm-none-eabi toolchain
 Download gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 from
