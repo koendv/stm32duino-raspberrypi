@@ -15,12 +15,12 @@ Download arduino15-raspberrybuster.zip
 ```
 unzip arduino15-raspberrybuster.zip
 ```
-Patch platforms.txt
+Patch platform.txt with [platform.txt,patch](https://github.com/koendv/stm32duino-raspberrypi/blob/master/platform.txt.patch)
 ```
 patch -p0 < platform.txt.patch 
 patching file .arduino15/packages/STM32/hardware/stm32/1.7.0/platform.txt
 ```
-Carefully inspect your platforms.txt. At the bottom of the file I've hardcoded the tools to my home directory. Change this to your home directory.
+Carefully inspect your platform.txt. At the bottom of the file I've hardcoded the tools to my home directory. Change this to your home directory.
 
 Start arduino IDE.
 ```
