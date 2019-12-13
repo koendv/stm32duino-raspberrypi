@@ -3,6 +3,42 @@
 This is a build of the gcc-arm-none-eabi  toolchain with STM32Tools  that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
 [Download](https://github.com/koendv/stm32duino-raspberrypi/releases/tag/v1.3.1-0)
+
+# Installation 
+*This is Work in Progress*
+
+Save old arduino environment.
+```
+mv .arduino15/ .arduino15.OLD
+```
+Download arduino15-raspberrybuster.zip
+```
+unzip arduino15-raspberrybuster.zip
+```
+Patch platforms.txt
+```
+patch -p0 < platform.txt.patch 
+patching file .arduino15/packages/STM32/hardware/stm32/1.7.0/platform.txt
+```
+Carefully inspect your platforms.txt. At the bottom of the file I've hardcoded the tools to my home directory. Change this to your home directory.
+
+Start arduino IDE.
+```
+arduino
+```
+
+There will be some error messages:
+``` 
+arm-none-eabi-gcc 8.2.1-1.7 seems to have no downloadable contributions for your operating system, but it is installed in /home/koen/.arduino15/packages/STM32/tools/arm-none-eabi-gcc/8.2.1-1.7
+```
+and the same for STM32Tools.
+
+In the Arduino IDE, in File -> Preferences:
+Set "Show verbose output during compilation"
+Set "Show verbose output during upload"
+
+This should give you a working STM32duino on raspberry. 
+
 # Build notes
 This is a native build of the gcc-arm-none-eabi toolchain and STM32Tools on a raspberry pi 4, 4gb ram. The armv7l build has been made booting the raspberry in 32-bit mode using [2019-09-26-raspbian-buster-full](https://www.raspberrypi.org/downloads/raspbian/). The aarch64 build has been made booting the raspberry in 64-bit mode using [2019-11-30-OPENFANS-Debian-Buster-Desktop-Aarch64-ext4-v2019-2.0-U1-Release](https://github.com/openfans-community-offical/Debian-Pi-Aarch64). Note the OpenFans 64-bit Debian for Raspberry uses the Chinese language by default; your preferences may differ. 
 
