@@ -28,9 +28,10 @@ arduino
 ```
 
 There will be some error messages:
-``` 
-arm-none-eabi-gcc 8.2.1-1.7 seems to have no downloadable contributions for your operating system, but it is installed in /home/koen/.arduino15/packages/STM32/tools/arm-none-eabi-gcc/8.2.1-1.7
-```
+  
+>arm-none-eabi-gcc 8.2.1-1.7 seems to have no downloadable contributions for your operating system, but it is installed in /home/koen/.arduino15/packages/STM32/tools/arm-none-eabi-gcc/8.2.1-1.7
+> 
+
 and the same for STM32Tools.
 
 In the Arduino IDE, in File -> Preferences:
