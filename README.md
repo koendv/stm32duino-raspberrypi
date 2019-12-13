@@ -15,7 +15,7 @@ Download arduino15-raspberrybuster.zip
 ```
 unzip arduino15-raspberrybuster.zip
 ```
-Patch platform.txt with [platform.txt,patch](https://github.com/koendv/stm32duino-raspberrypi/blob/master/platform.txt.patch)
+Patch platform.txt with [platform.txt.patch](https://github.com/koendv/stm32duino-raspberrypi/blob/master/platform.txt.patch)
 ```
 patch -p0 < platform.txt.patch 
 patching file .arduino15/packages/STM32/hardware/stm32/1.7.0/platform.txt
