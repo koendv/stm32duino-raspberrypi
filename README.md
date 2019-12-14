@@ -7,6 +7,11 @@ This is a build of the gcc-arm-none-eabi  toolchain with STM32Tools  that runs o
 # Installation 
 *This is Work in Progress*
 
+Install runtime libraries.
+```
+apt-get install flex libusb-1.0.0-dev
+```
+
 Save old arduino environment.
 ```
 mv .arduino15/ .arduino15.OLD
