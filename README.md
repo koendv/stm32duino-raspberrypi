@@ -136,13 +136,13 @@ Running STM32Tools requires libusb-1.0.
 
 ## arduino15
 
-Arduino IDE preferences and any hardware packages you install via Tools > Board > Boards Manager are stored in the .arduino15 directory in your home directory. 
+Arduino IDE preferences and any hardware packages you install via *Tools > Board > Boards Manager* are stored in the .arduino15 directory in your home directory. 
 
 The raspberry .arduino15 directory has been created by
 
 * setting up stm32duino on an intel linux system
 * copying the .arduino15 directory from intel linux to raspberry
-* replacing intel arm-none-eabi gcc compiler and stm32tools with native arm linux versions.
+* replacing intel linux arm-none-eabi compiler and stm32tools with native arm linux versions.
 
 You can download a zip of the arduino15 directory in the [download](https://github.com/koendv/stm32duino-raspberrypi/releases/tag/v1.3.1-0) section.
 
