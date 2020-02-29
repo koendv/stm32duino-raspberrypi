@@ -1,7 +1,7 @@
 {
   "packages": [
     {
-      "name": "STM32",
+      "name": "STM32-raspberrypi",
       "websiteURL": "https://github.com/koendv/stm32duino-raspberrypi",
       "maintainer": "koendv",
       "email": "koen@mcvax.org",
