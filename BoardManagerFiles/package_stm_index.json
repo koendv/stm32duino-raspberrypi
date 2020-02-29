@@ -1,0 +1,371 @@
+{
+  "packages": [
+    {
+      "name": "STM32",
+      "websiteURL": "https://github.com/koendv/stm32duino-raspberrypi",
+      "maintainer": "koendv",
+      "email": "koen@mcvax.org",
+      "help": {
+        "online": "http://www.stm32duino.com/"
+      },
+      "platforms": [
+        {
+          "name": "STM32 Cores",
+          "architecture": "stm32",
+          "version": "1.8.0",
+          "category": "Contributed",
+          "url": "https://github.com/stm32duino/Arduino_Core_STM32/releases/download/1.8.0/STM32-1.8.0.tar.bz2",
+          "archiveFileName": "STM32-1.8.0.tar.bz2",
+          "checksum": "SHA-256:756d39fab2ca5c0bf857b64153a265dd7ef2c151464bd248d6ca94ee05ca8fe7",
+          "size": "29132822",
+          "boards": [
+            {
+              "name": "Nucleo F207ZG"
+            },
+            {
+              "name": "Nucleo F429ZI"
+            },
+            {
+              "name": "Nucleo F767ZI"
+            },
+            {
+              "name": "Nucleo H743ZI"
+            },
+            {
+              "name": "Nucleo H743ZI2"
+            },
+            {
+              "name": "Nucleo L496ZG"
+            },
+            {
+              "name": "Nucleo L496ZG-P"
+            },
+            {
+              "name": "Nucleo L4R5ZI"
+            },
+            {
+              "name": "Nucleo L4R5ZI-P"
+            },
+            {
+              "name": "Nucleo F030R8"
+            },
+            {
+              "name": "Nucleo F091RC"
+            },
+            {
+              "name": "Nucleo F103RB"
+            },
+            {
+              "name": "Nucleo F302R8"
+            },
+            {
+              "name": "Nucleo F303RE"
+            },
+            {
+              "name": "Nucleo F401RE"
+            },
+            {
+              "name": "Nucleo F411RE"
+            },
+            {
+              "name": "Nucleo F446RE"
+            },
+            {
+              "name": "Nucleo G071RB"
+            },
+            {
+              "name": "Nucleo G431RB"
+            },
+            {
+              "name": "Nucleo G474RE"
+            },
+            {
+              "name": "Nucleo L053R8"
+            },
+            {
+              "name": "Nucleo L073RZ"
+            },
+            {
+              "name": "Nucleo L152RE"
+            },
+            {
+              "name": "Nucleo L452RE"
+            },
+            {
+              "name": "Nucleo L452RE-P"
+            },
+            {
+              "name": "Nucleo L476RG"
+            },
+            {
+              "name": "P-Nucleo WB55RG"
+            },
+            {
+              "name": "Nucleo L031K6"
+            },
+            {
+              "name": "Nucleo L412KB"
+            },
+            {
+              "name": "Nucleo L432KC"
+            },
+            {
+              "name": "Nucleo F303K8"
+            },
+            {
+              "name": "Nucleo G431KB"
+            },
+            {
+              "name": "STM32F030R8-DISCVL"
+            },
+            {
+              "name": "STM32F072B-DISCOVERY"
+            },
+            {
+              "name": "STM32F100RB-DISCVL"
+            },
+            {
+              "name": "STM32F407G-DISC1"
+            },
+            {
+              "name": "STM32F746G-DISCOVERY"
+            },
+            {
+              "name": "STM32L475VG-DISCOVERY-IOT"
+            },
+            {
+              "name": "Discovery L072CZ-LRWAN1"
+            },
+            {
+              "name": "SensorTile.box"
+            },
+            {
+              "name": "STM32MP157A-DK1"
+            },
+            {
+              "name": "STM32MP157C-DK2"
+            },
+            {
+              "name": "STM32F030F4 Demo board"
+            },
+            {
+              "name": "STM32F030F4 Demo board (16Mhz)"
+            },
+            {
+              "name": "STM32F030F4 Demo board (internal RC oscillator)"
+            },
+            {
+              "name": "BluePill F103C6 (32K)"
+            },
+            {
+              "name": "BluePill F103C8"
+            },
+            {
+              "name": "BluePill F103C8 (128k)"
+            },
+            {
+              "name": "BlackPill F103C8"
+            },
+            {
+              "name": "BlackPill F103C8 (128k)"
+            },
+            {
+              "name": "Generic F103R8T6 (Blue Button)"
+            },
+            {
+              "name": "Generic F103RBT6 (Blue Button)"
+            },
+            {
+              "name": "Generic F103RCT6 (Blue Button)"
+            },
+            {
+              "name": "Generic F103RET6 (Blue Button)"
+            },
+            {
+              "name": "HY-TinySTM103TB"
+            },
+            {
+              "name": "Maple Mini F103CB"
+            },
+            {
+              "name": "RobotDyn BlackPill F303CC"
+            },
+            {
+              "name": "Black F407VE"
+            },
+            {
+              "name": "Black F407VG"
+            },
+            {
+              "name": "Black F407ZE"
+            },
+            {
+              "name": "Black F407ZG"
+            },
+            {
+              "name": "Blue F407VE mini"
+            },
+            {
+              "name": "DIYMORE STM32F407VGT"
+            },
+            {
+              "name": "FK407M1 STM32F407VET"
+            },
+            {
+              "name": "BlackPill F401CC"
+            },
+            {
+              "name": "Core board F401RCT6"
+            },
+            {
+              "name": "Adafruit Feather STM32F405"
+            },
+            {
+              "name": "Generic F401RE"
+            },
+            {
+              "name": "Generic F401RD"
+            },
+            {
+              "name": "Generic F401RC"
+            },
+            {
+              "name": "Generic F401RB"
+            },
+            {
+              "name": "ThunderPack"
+            },
+            {
+              "name": "PX-HER0"
+            },
+            {
+              "name": "Wraith V1 ESC"
+            },
+            {
+              "name": "RAK811 LoRa Tracker (16kb RAM)"
+            },
+            {
+              "name": "RAK811 LoRa Tracker (32kb RAM)"
+            },
+            {
+              "name": "RHF76 052"
+            },
+            {
+              "name": "Elektor LoRa Node Core F072"
+            },
+            {
+              "name": "Armed V1"
+            },
+            {
+              "name": "RemRam v1"
+            },
+            {
+              "name": "RUMBA32"
+            },
+            {
+              "name": "STEVAL-3DP001V1"
+            },
+            {
+              "name": "PRNTR F407 v1"
+            },
+            {
+              "name": "PRNTR v2"
+            },
+            {
+              "name": "EExtruder F030 V1"
+            },
+            {
+              "name": "Malyan M200 V1"
+            },
+            {
+              "name": "Malyan M200 V2"
+            },
+            {
+              "name": "Malyan M300"
+            },
+            {
+              "name": "VAkE v1.0"
+            },
+            {
+              "name": "Afro Flight Rev5 (8MHz)"
+            },
+            {
+              "name": "Afro Flight Rev5 (12MHz)"
+            },
+            {
+              "name": "Sparky V1 F303 FC"
+            },
+            {
+              "name": "MKR Sharky"
+            }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "STM32",
+              "name": "xpack-arm-none-eabi-gcc",
+              "version": "9.2.1-1.1"
+            },
+            {
+              "packager": "STM32",
+              "name": "STM32Tools",
+              "version": "1.3.2"
+            },
+            {
+              "packager": "STM32",
+              "name": "CMSIS",
+              "version": "5.5.1"
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "xpack-arm-none-eabi-gcc",
+          "version": "9.2.1-1.2",
+          "systems": [
+            {
+              "host": "arm-linux-gnueabihf",
+              "url": "https://github.com/xpack-dev-tools/pre-releases/releases/download/v1.0/xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tar.gz",
+              "archiveFileName": "xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tar.gz",
+              "checksum": "SHA-256:e77b934cdd616e68593327b09e8a17234ac56d457af571550b096729c80b3216",
+              "size": "128001146"
+            }
+          ]
+        },
+        {
+          "name": "CMSIS",
+          "version": "5.5.1",
+          "systems": [
+            {
+              "host": "arm-linux-gnueabihf",
+              "url": "https://github.com/stm32duino/ArduinoModule-CMSIS/releases/download/5.5.1/CMSIS-5.5.1.tar.bz2",
+              "archiveFileName": "CMSIS-5.5.1.tar.bz2",
+              "checksum": "SHA-256:3dddbd241986fc7a7861a62c748abf350055ac4542d362f38f1778caad2c4bf8",
+              "size": "24351965"
+            },
+            {
+              "host": "all",
+              "url": "https://github.com/stm32duino/ArduinoModule-CMSIS/releases/download/5.5.1/CMSIS-5.5.1.tar.bz2",
+              "archiveFileName": "CMSIS-5.5.1.tar.bz2",
+              "checksum": "SHA-256:3dddbd241986fc7a7861a62c748abf350055ac4542d362f38f1778caad2c4bf8",
+              "size": "24351965"
+            }
+          ]
+        },
+        {
+          "name": "STM32Tools",
+          "version": "1.2.2",
+          "systems": [
+            {
+              "host": "arm-linux-gnueabihf",
+              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/1.2.2-0/STM32Tools-1.2.2-arm-linux-gnueabihf.tar.bz2",
+              "archiveFileName": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/1.2.2-0/STM32Tools-1.2.2-arm-linux-gnueabihf.tar.bz2",
+              "checksum": "SHA-256:1b16139b62cfd9f30fbb3f75cabed51d428d6e22a94887d7a52476c5a636280a",
+              "size": "130588"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
