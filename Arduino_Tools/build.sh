@@ -43,7 +43,7 @@ install -D upload-reset $TOOLDIR
 cd $SRCDIR
 
 cd $TOPDIR
-tar cf STM32Tools-arm-linux-gnuabihf-$VERSION.tar ./STM32Tools
-bzip2 --best STM32Tools-arm-linux-gnuabihf-$VERSION.tar
+tar cf STM32Tools-$VERSION-arm-linux-gnuabihf.tar ./STM32Tools
+bzip2 --best STM32Tools-$VERSION-arm-linux-gnuabihf.tar
 
 #not truncated
