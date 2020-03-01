@@ -28,8 +28,9 @@ case "$PROTOCOL" in
 	$(dirname $0)/stm32flash -g 0x8000000 -b 115200 -w ${FILEPATH} /dev/"$3" 
 	;;
 "12"|"2")
-	# dfu - someone fix this
-	$(dirname $0)/dfu-util/dfu-util -D ${FILEPATH} -d 1eaf:0003 --intf 0 --alt 1
+	# dfu - edit for your setup
+	# $(dirname $0)/dfu-util/dfu-util -D ${FILEPATH} -d 1eaf:0003 --intf 0 --alt 1
+	$(dirname $0)/dfu-util/dfu-util -D ${FILEPATH}
 	;;
 *)
 	echo "$0: Please update this script."
