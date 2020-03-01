@@ -1,5 +1,6 @@
 #!/bin/bash
 
+TOPDIR=$PWD
 TOOLDIR=$PWD/STM32Tools/tools/linux
 SRCDIR=$PWD/src
 
@@ -34,5 +35,8 @@ cd stm32flash
 make
 install -D stm32flash $TOOLDIR
 cd $SRCDIR
+
+cd $TOPDIR
+tar cvf STM32Tools-arm-linux-gnuabihf-1.3.2.tar ./STM32Tools
 
 #not truncated
