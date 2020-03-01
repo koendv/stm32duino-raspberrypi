@@ -1,5 +1,0 @@
-git submodule add https://github.com/rogerclarkmelbourne/Arduino_STM32
-git submodule add https://git.code.sf.net/p/dfu-util/dfu-util
-git submodule add https://git.code.sf.net/p/stm32flash/code stm32flash-serial
-git submodule add https://github.com/texane/stlink.git
-git submodule add https://github.com/Serasidis/STM32_HID_Bootloader.git
