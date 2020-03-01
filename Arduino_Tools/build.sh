@@ -1,8 +1,11 @@
 #!/bin/bash
 
-TOOLDIR=$PWD/linux
+TOOLDIR=$PWD/STM32Tools/tools/linux
 SRCDIR=$PWD/src
+
 install -d $TOOLDIR $TOOLDIR/dfu-util
+
+cd $SRCDIR
 
 cd dfu-util
 sh ./autogen.sh
