@@ -1,5 +1,6 @@
 # stm32duino-raspberrypi
 *Work in Progress*
+
 A build of an arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
 ## Installation
@@ -27,18 +28,22 @@ As an example, if using a STM32F103 Blue Pill choose *Tools->Board: -> Generic S
 ## Usage
 Under *Tools->Upload Method* you'll find a number of tools to upload firmware.  
 
-| Menu  | command  |
+| Menu  | Command  |
 |---|---|
 |STM32CubeProgrammer (SWD) | st-flash
 |STM32CubeProgrammer (Serial) | stm32flash
 |STM32CubeProgrammer (DFU) | dfu-util
+|Black Magic Probe | arm-none-eabi-gdb
 |HID Bootloader | hid-flash
+|Maple DFU Uploader | maple_upload
 
-You can edit the command line options of these tools in the shell script ``~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/stm32CubeProg.sh``
+You can edit the command line options of the tools in the shell script ``~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/stm32CubeProg.sh``
 
 ## Build notes
 To build the tools:
 ```
+apt-get update
+apt-get install build-essential git libusb-1.0-0-dev autotools-dev autoconf automake cmake
 git clone https://github.com/koendv/stm32duino-raspberrypi
 cd stm32duino-raspberrypi/Arduino_Tools/
 sh ./build.sh
@@ -56,5 +61,4 @@ ant run
 ```
 These last two commands need to be repeated every time you modify the sources. If you have not modified the sources since the last run, ``ant run`` is sufficient.
 
-
-not truncated.
+_not truncated._
