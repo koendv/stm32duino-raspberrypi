@@ -10,7 +10,7 @@ Edit ``.arduino15/preferences.txt``, and add the following line:
 ```
 allow_insecure_packages=true
 ```
-This allows the use of unsigned packages.
+This allows the use of unsigned packages. Also tick *Verbose output during upload*.
 
 Start  the Arduino IDE. In *File --> Preferences --> Additional Board Manager URLs:* paste the following url:
 ```

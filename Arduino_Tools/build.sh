@@ -43,7 +43,7 @@ install -D upload-reset $TOOLDIR
 cd $SRCDIR
 
 cd $TOPDIR
-tar cf STM32Tools-$VERSION-linux.tar ./STM32Tools
+tar cf STM32Tools-$VERSION-linux.tar STM32Tools
 bzip2 --best STM32Tools-$VERSION-linux.tar
 
 #not truncated
