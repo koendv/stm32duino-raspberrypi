@@ -59,6 +59,6 @@ cd Arduino/build
 ant dist
 ant run
 ```
-These last two commands need to be repeated every time you modify the sources. If you have not modified the sources since the last run, ``ant run`` is sufficient.
+The commands ``ant dist; ant run`` need to be repeated every time you modify the IDE sources. If you have not modified the IDE sources since the last run, ``ant run`` is sufficient.
 
 _not truncated._
