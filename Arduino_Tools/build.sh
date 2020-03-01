@@ -37,6 +37,6 @@ install -D stm32flash $TOOLDIR
 cd $SRCDIR
 
 cd $TOPDIR
-tar cvf STM32Tools-arm-linux-gnuabihf-1.3.2.tar ./STM32Tools
+tar cf STM32Tools-arm-linux-gnuabihf-1.3.2.tar ./STM32Tools
 
 #not truncated
