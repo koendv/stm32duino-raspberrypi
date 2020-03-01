@@ -1,149 +1,58 @@
 # stm32duino-raspberrypi
 
-This is a build of the gcc-arm-none-eabi  toolchain with STM32Tools  that runs on raspberry pi and targets stm32 arm processors ("blue pill").
+A build of an arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
-[Download](https://github.com/koendv/stm32duino-raspberrypi/releases/tag/v1.3.1-0)
+## Installation
 
-# Installation 
+Start and exit the Arduino IDE. This creates the directory ``~/.arduino15``  in your home directory, and the file ``~/.arduino15/preferences.txt``
 
-Install runtime libraries.
+Edit ``.arduino15/preferences.txt``, and add the following line:
 ```
-apt-get install flex libusb-1.0.0-dev
+allow_insecure_packages=true
 ```
+This allows the use of unsigned packages.
 
-Save old arduino environment.
+Start  the Arduino IDE. In *File --> Preferences --> Additional Board Manager URLs:* paste the following url:
 ```
-mv .arduino15/ .arduino15.OLD
+https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/BoardManagerFiles/package_stm_index.json
 ```
-Download arduino15-raspberrybuster.zip
+Press OK.
+
+Open *Tools -> Board: -> Boards Manager*
+In the search field, type "STM32". Install the "STM32 Cores" board package, version 1.8.0. You may get a message *[exec] Warning: forced trusting untrusted contributions*. Press close.
+
+The STM32 cores are at the very bottom of the list of supported boards. 
+As an example, if using a STM32F103 Blue Pill choose *Tools->Board: -> Generic STM32F1 series* .
+
+## Usage
+Under *Tools->Upload Method* you'll find a number of tools to upload firmware.  
+
+| Menu  | command  |
+|---|---|
+|STM32CubeProgrammer (SWD) | st-flash
+|STM32CubeProgrammer (Serial) | stm32flash
+|STM32CubeProgrammer (DFU) | dfu-util
+|HID Bootloader | hid-flash
+
+## Build notes
+To build the tools:
 ```
-unzip arduino15-raspberrybuster.zip
-```
-Patch platform.txt with [platform.txt.patch](https://github.com/koendv/stm32duino-raspberrypi/blob/master/platform.txt.patch)
-```
-patch -p0 < platform.txt.patch 
-patching file .arduino15/packages/STM32/hardware/stm32/1.7.0/platform.txt
-```
-Carefully inspect your platform.txt. At the bottom of the file I've hardcoded the tools to my home directory. Change this to your home directory.
-
-Start arduino IDE.
-```
-arduino
-```
-
-There will be some error messages:
-  
->arm-none-eabi-gcc 8.2.1-1.7 seems to have no downloadable contributions for your operating system, but it is installed in /home/koen/.arduino15/packages/STM32/tools/arm-none-eabi-gcc/8.2.1-1.7
-> 
-
-and the same for STM32Tools.
-
-In the Arduino IDE, in File -> Preferences:
-Set "Show verbose output during compilation"
-Set "Show verbose output during upload"
-
-This should give you a working STM32duino on raspberry. 
-
-# Build notes
-This is a native build of the gcc-arm-none-eabi toolchain and STM32Tools on a raspberry pi 4, 4gb ram. The armv7l build has been made booting the raspberry in 32-bit mode using [2019-09-26-raspbian-buster-full](https://www.raspberrypi.org/downloads/raspbian/). The aarch64 build has been made booting the raspberry in 64-bit mode using [2019-11-30-OPENFANS-Debian-Buster-Desktop-Aarch64-ext4-v2019-2.0-U1-Release](https://github.com/openfans-community-offical/Debian-Pi-Aarch64). Note the OpenFans 64-bit Debian for Raspberry uses the Chinese language by default; your preferences may differ. 
-
-## arm-none-eabi toolchain
-Download gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 from
-https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
-
-```
-apt-get -f install -y build-essential autoconf autogen bison dejagnu flex flip gawk git gperf gzip nsis openssh-client p7zip-full perl python-dev libisl-dev scons tcl texinfo tofrodos wget zip texlive texlive-plain-generic texlive-extra-utils libncurses5-dev
-
-mkdir ~/toolchain
-cd toolchain/
-mv ../gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2 .
-tar -xjf gcc-arm-none-eabi-9-2019-q4-major-src.tar.bz2
-cd ./gcc-arm-none-eabi-9-2019-q4-major
-./install-sources.sh 
-```
-In "build-common.sh" replace JOBS=`grep ^processor /proc/cpuinfo|wc -l` with JOBS=1, to avoid running out of memory.
-```
---- build-common.sh.ORIG	2019-12-05 11:42:34.735262457 +0100
-+++ build-common.sh	2019-12-05 11:42:10.175711531 +0100
-@@ -304,7 +304,8 @@
-     BUILD="$host_arch"-linux-gnu
-     HOST_NATIVE="$host_arch"-linux-gnu
-     READLINK=readlink
--    JOBS=`grep ^processor /proc/cpuinfo|wc -l`
-+    #JOBS=`grep ^processor /proc/cpuinfo|wc -l`
-+    JOBS=1
-     GCC_CONFIG_OPTS_LCPP="--with-host-libstdcxx=-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm"
-     MD5="md5sum -b"
-     PACKAGE_NAME_SUFFIX="${host_arch}-linux"
-```
-Begin build:
-```
-./build-prerequisites.sh --skip_steps=mingw32
-./build-toolchain.sh --build_type=native --skip_steps=mingw32,mingw32-gdb-with-python,howto,manual
-```
-The build takes about 16.5 hours using the internal sdcard. On raspberry pi 4, USB is faster than the internal sdcard, so you can speed up the build to about 10 hours by connecting USB storage, putting swap and build directories on USB storage, and setting JOBS=2.
-
-## STM32Tools
-
-Download STM32Tools-1.3.1-linux.tar.bz2 
-
-Download STM32_HID_Bootloader-2.2.2.tar.gz from https://github.com/Serasidis/STM32_HID_Bootloader/releases
-
-```
-apt-get install pkg-config libusb-1.0-0-dev
-tar xvf ~/Downloads/STM32Tools-1.3.1-linux.tar.bz2
-
-cd STM32Tools/tools/
-rm -rf linux64
-
-cd src/dfu-util
-sh ./autogen.sh
-./configure
-make
-install src/dfu-util ../../linux/dfu-util/
-install src/dfu-prefix ../../linux/dfu-util/
-install src/dfu-suffix ../../linux/dfu-util/
-make clean
-
-cd ../massStorageCopy/
-make massStorageCopy
-install massStorageCopy ../../linux/
-make clean
-
-cd ../upload-reset/
-gcc -o upload-reset upload-reset.c
-mv upload-reset ../../linux/
-cd ..
+git clone https://github.com/koendv/stm32duino-raspberrypi
+cd stm32duino-raspberrypi/Arduino_Tools/
+sh ./build.sh
+ls -l STM32Tools-*
 ```
 
-Build the hid-flash utility:
-
+Sometimes you need the latest version of the IDE. To build the Arduino IDE from source:
 ```
-tar xvf ~/Downloads/STM32_HID_Bootloader-2.2.2.tar.gz 
-cd STM32_HID_Bootloader-2.2.2/cli/
-make
-install hid-flash ../../../linux/
-make clean
+sudo apt-get install git make gcc ant openjdk-8-jdk unzip openjfx
+git clone https://github.com/arduino/Arduino.git
+cd Arduino
+cd Arduino/build
+ant dist
+ant run
 ```
-Package everything in a tar archive:
-```
-cd ../../../../../
+These last two commands need to be repeated every time you modify the sources. If you have not modified the sources since the last run, ``ant run`` is sufficient.
 
-tar cvf STM32Tools-1.3.1-armv7l-linux-gnu.tar ./STM32Tools
-bzip2 --best STM32Tools-1.3.1-armv7l-linux-gnu.tar
-```
-Running STM32Tools requires libusb-1.0.
 
-## arduino15
-
-Arduino IDE preferences and any hardware packages you install via *Tools > Board > Boards Manager* are stored in the .arduino15 directory in your home directory. 
-
-The raspberry .arduino15 directory has been created by
-
-* setting up stm32duino on an intel linux system
-* copying the .arduino15 directory from intel linux to raspberry
-* replacing intel linux arm-none-eabi compiler and stm32tools with native arm linux versions.
-
-You can download a zip of the arduino15 directory in the [download](https://github.com/koendv/stm32duino-raspberrypi/releases/tag/v1.3.1-0) section.
-
-not truncated
+not truncated.
