@@ -1,5 +1,6 @@
 #!/bin/bash
 
+VERSION=1.3.2
 TOPDIR=$PWD
 TOOLDIR=$PWD/STM32Tools/tools/linux
 SRCDIR=$PWD/src
@@ -42,6 +43,7 @@ install -D upload-reset $TOOLDIR
 cd $SRCDIR
 
 cd $TOPDIR
-tar cf STM32Tools-arm-linux-gnuabihf-1.3.2.tar ./STM32Tools
+tar cf STM32Tools-arm-linux-gnuabihf-$VERSION.tar ./STM32Tools
+bzip2 --best STM32Tools-arm-linux-gnuabihf-$VERSION.tar
 
 #not truncated
