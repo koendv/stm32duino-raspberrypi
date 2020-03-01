@@ -21,18 +21,18 @@ case "$PROTOCOL" in
 	;;
 "11")
 	# serial upload with erase
-	$(dirname $0)/stm32flash -o /dev/"$4" 
+	$(dirname $0)/stm32flash -o /dev/"$3" 
 	;&
 "1")
 	# serial upload
-	$(dirname $0)/stm32flash -g 0x8000000 -b 115200 -w ${FILEPATH} /dev/"$4" 
+	$(dirname $0)/stm32flash -g 0x8000000 -b 115200 -w ${FILEPATH} /dev/"$3" 
 	;;
-"22"|"2")
+"12"|"2")
 	# dfu - someone fix this
-	$(dirname $0)/dfu-util -D ${FILEPATH} -d 1eaf:0003 --intf 0 --alt 1
+	$(dirname $0)/dfu-util/dfu-util -D ${FILEPATH} -d 1eaf:0003 --intf 0 --alt 1
 	;;
 *)
-	echo "Please update this script."
+	echo "$0: Please update this script."
 	;;
 esac
 #not truncated
