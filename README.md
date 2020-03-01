@@ -1,5 +1,5 @@
 # stm32duino-raspberrypi
-
+*Work in Progress*
 A build of an arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
 ## Installation
@@ -33,6 +33,8 @@ Under *Tools->Upload Method* you'll find a number of tools to upload firmware.
 |STM32CubeProgrammer (Serial) | stm32flash
 |STM32CubeProgrammer (DFU) | dfu-util
 |HID Bootloader | hid-flash
+
+You can edit the command line options of these tools in the shell script ``~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/stm32CubeProg.sh``
 
 ## Build notes
 To build the tools:
