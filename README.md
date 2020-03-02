@@ -1,7 +1,7 @@
 # stm32duino-raspberrypi
 *Work in Progress*
 
-A build of an arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
+An arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
 ## Installation
 
@@ -22,7 +22,7 @@ Press OK.
 Open *Tools -> Board: -> Boards Manager*
 In the search field, type "STM32". Install the "STM32 Cores" board package, version 1.8.0. You may get a message *[exec] Warning: forced trusting untrusted contributions*. Press close.
 
-The STM32 cores are at the very bottom of the list of supported boards. 
+Select the STM32 cores as compilation target.
 As an example, if using a STM32F103 Blue Pill choose *Tools->Board: -> Generic STM32F1 series* .
 
 ## Usage
@@ -37,7 +37,11 @@ Under *Tools->Upload Method* you'll find a number of tools to upload firmware.
 |HID Bootloader | hid-flash
 |Maple DFU Uploader | maple_upload
 
-You can edit the command line options of the tools in the shell script ``~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/stm32CubeProg.sh``
+The tools to upload firmware are installed in ``~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux``. 
+
+Run the shell script ``install.sh`` in the tools directory to install udev rules and add the current user to the dialout group. 
+
+Edit the shell script ``stm32CubeProg.sh`` to change the command line options of the STM32CubeProgrammer firmware upload commands.
 
 ## Build notes
 To build the tools:
