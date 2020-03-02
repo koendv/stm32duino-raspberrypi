@@ -7,7 +7,7 @@ An arduino toolchain that runs on raspberry pi and targets stm32 arm processors 
 
 Start and exit the Arduino IDE. This creates the directory ``~/.arduino15``  in your home directory, and the file ``~/.arduino15/preferences.txt``
 
-Edit ``.arduino15/preferences.txt``, and add the following line:
+With the Arduino IDE not running, edit ``.arduino15/preferences.txt``, and add the following line:
 ```
 allow_insecure_packages=true
 ```
