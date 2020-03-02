@@ -1,5 +1,4 @@
 # stm32duino-raspberrypi
-*Work in Progress*
 
 An arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
@@ -11,7 +10,7 @@ With the Arduino IDE not running, edit ``.arduino15/preferences.txt``, and add t
 ```
 allow_insecure_packages=true
 ```
-This allows the use of unsigned packages. Also tick *Verbose output during upload*.
+This allows the use of unsigned packages like this one. Also tick *Verbose output during upload*.
 
 Start  the Arduino IDE. In *File --> Preferences --> Additional Board Manager URLs:* paste the following url:
 ```
@@ -20,13 +19,13 @@ https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/BoardMana
 Press OK.
 
 Open *Tools -> Board: -> Boards Manager*
-In the search field, type "STM32". Install the "STM32 Cores" board package, version 1.8.0. You may get a message *[exec] Warning: forced trusting untrusted contributions*. Press close.
+In the search field, type "STM32". Install the "STM32 Cores" board package, version 1.8.0. Press close. Ignore any messages *Warning: forced trusting untrusted contributions*.
 
-Select the STM32 cores as compilation target.
+In the Tools menu select the STM32 cores as compilation target.
 As an example, if using a STM32F103 Blue Pill choose *Tools->Board: -> Generic STM32F1 series* .
 
 ## Usage
-Under *Tools->Upload Method* you'll find a number of tools to upload firmware.  
+Under *Tools->Upload Method* you'll find a number of tools to upload firmware. 
 
 | Menu  | Command  |
 |---|---|
