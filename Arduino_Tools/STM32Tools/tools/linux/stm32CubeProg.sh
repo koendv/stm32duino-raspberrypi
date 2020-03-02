@@ -27,8 +27,8 @@ case "$PROTOCOL" in
 	;&
 "1")
 	# serial upload
-	if [[ $# -lt 4 ]]; then
-		echo "Please select serial port"
+	if [[ $3 == "-s" ]]; then
+		echo "please select serial port using Tools->Port menu"
 	fi
 	$TOOLDIR/stm32flash -g 0x8000000 -b 115200 -w ${FILEPATH} /dev/"$3"
 	;;
