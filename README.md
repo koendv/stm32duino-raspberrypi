@@ -52,8 +52,9 @@ cd stm32duino-raspberrypi/Arduino_Tools/
 sh ./build.sh
 ls -l STM32Tools-*
 ```
+Note stlink is patched for static linking with libstlink.a . This avoids conflict if STM32Tools and /usr/bin/ have different versions of st-flash.
 
-Sometimes you need the latest version of the IDE. To build the Arduino IDE from source:
+Sometimes you need the latest version of the Arduino IDE. To build the Arduino IDE from source:
 ```
 sudo apt-get install git make gcc ant openjdk-8-jdk unzip openjfx
 git clone https://github.com/arduino/Arduino.git
