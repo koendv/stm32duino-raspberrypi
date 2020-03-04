@@ -181,18 +181,10 @@ endif()
 # Tools
 ###
 add_executable(st-flash src/tools/flash.c src/tools/flash_opts.c)
-if (WIN32 OR APPLE)
-	target_link_libraries(st-flash ${STLINK_LIB_STATIC})
-else()
-	target_link_libraries(st-flash ${STLINK_LIB_SHARED})
-endif()
+target_link_libraries(st-flash ${STLINK_LIB_STATIC})
 
 add_executable(st-info src/tools/info.c)
-if (WIN32 OR APPLE)
-	target_link_libraries(st-info ${STLINK_LIB_STATIC})
-else()
-	target_link_libraries(st-info ${STLINK_LIB_SHARED})
-endif()
+target_link_libraries(st-info ${STLINK_LIB_STATIC})
 
 install(TARGETS st-flash st-info
 	RUNTIME DESTINATION bin
