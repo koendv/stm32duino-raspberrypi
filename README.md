@@ -19,7 +19,7 @@ https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/BoardMana
 Press OK.
 
 Open *Tools -> Board: -> Boards Manager*
-In the search field, type "STM32". Install the "STM32 Cores" board package, version 1.8.0. Press close. Ignore any messages *Warning: forced trusting untrusted contributions*.
+In the search field, type "STM32". Install the "STM32 Cores" board package, version 1.8.0. Installing takes about 6 minutes. Press close. Ignore any messages *Warning: forced trusting untrusted contributions*.
 
 In the Tools menu select the STM32 cores as compilation target.
 As an example, if using a STM32F103 Blue Pill choose *Tools->Board: -> Generic STM32F1 series* .
