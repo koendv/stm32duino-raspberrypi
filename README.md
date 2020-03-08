@@ -24,10 +24,17 @@ In the search field, type "STM32". Install the "STM32 Cores" board package, vers
 In the Tools menu select the STM32 cores as compilation target.
 As an example, if using a STM32F103 Blue Pill choose *Tools->Board: -> Generic STM32F1 series* .
 
-## Usage
-Under *Tools->Upload Method* you'll find a number of tools to upload firmware. 
+The tools to upload firmware are installed in the tools directory, ``~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux``.
 
-| Menu  | Command  |
+Run the shell script ``install.sh`` in the tools directory to install udev rules and add the current user to the dialout group.
+
+If needed, edit the shell script ``stm32CubeProg.sh`` in the tools directory to change the command line options of the STM32CubeProgrammer firmware upload commands.
+
+## Description
+
+Under *Tools->Upload Method* you'll find a number of options to upload firmware.
+
+| Menu  | Command executed  |
 |---|---|
 |STM32CubeProgrammer (SWD) | st-flash
 |STM32CubeProgrammer (Serial) | stm32flash
@@ -36,11 +43,99 @@ Under *Tools->Upload Method* you'll find a number of tools to upload firmware.
 |HID Bootloader | hid-flash
 |Maple DFU Uploader | maple_upload
 
-The tools to upload firmware are installed in ``~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux``. 
+First the boot jumpers are described, then each upload method is described briefly.
 
-Run the shell script ``install.sh`` in the tools directory to install udev rules and add the current user to the dialout group. 
+### Boot jumpers
 
-Edit the shell script ``stm32CubeProg.sh`` to change the command line options of the STM32CubeProgrammer firmware upload commands.
+The STM32 has rom, flash and ram. Two pins, Boot0 and Boot1, determine whether the processor boots from rom, flash or ram. On a Blue Pill, the value of Boot0 and Boot1 is determined by two jumpers.
+
+Boot1 | Boot0 | Mode | Address
+--- | --- | --- | ---
+x | 0 | Boot from flash | 0x0800 0000
+0 | 1| Boot from  rom |
+1 | 1| Boot from ram | 0x2000 0000
+
+These jumper settings take effect next time you boot, whether it is by pushing reset, or by power cycling, or when the processor exits the standby (sleep) mode.
+
+The rom contains a factory-programmed bootloader.  After booting from rom, you can upload firmware either over the serial port, over USB, over I2C, ... Exactly what ports can be used to upload firmware depends upon the STM32 processor model. The STM32F103C8T6 rom only supports upload over the serial port. If you have a different processor, the authoritative guide to find out how to activate the bootloader and what ports to use is STM Application note [AN2606:  STM32 microcontroller system memory boot mode](https://www.st.com/content/ccc/resource/technical/document/application_note/b9/9b/16/3a/12/1e/40/0c/CD00167594.pdf/files/CD00167594.pdf/jcr:content/translations/en.CD00167594.pdf).
+
+> Even if your firmware hangs, you can always change jumper settings, boot from rom, upload new firmware, and change the jumpers back to booting from flash.
+
+### Serial Wire Debugging (SWD)
+
+Serial Wire Debugging uses two STM32 pins, SWCLK (PA14) and SWDIO (PA13). Connect raspberry and Blue Pill using a st-link adapter.
+
+Set boot Jumper settings: Boot0=0, Boot1=0. (boot from flash). Push reset.
+
+Connections:
+
+st-link | Blue Pill |  Comment
+--- | --- | ---
+SWCLK | SWCLK |
+SWDIO | SWIO |
+GND | GND |
+3.3V | 3v3 | Careful! Connect only one power supply.
+RST | R | Optional. Only if "reset" command needed
+
+Connecting the reset pin is only needed if you use the ``st-flash reset`` command.
+
+> Connect only one power supply at a time. Connect a Blue pill to 5V using the USB connector, or connect to 3.3V using the st-link. Do not connect both at the same time, you risk damaging a chip.
+
+In the Arduino IDE choose *Tools->Upload Method -> STM32CubeProgrammer (SWD)* and then *Sketch->Upload*. Or from the command line:
+```
+st-flash write Blink.bin 0x8000000
+```
+where Blink.bin is the firmware, and 0x800 0000 is the start address of flash memory.
+
+### Serial Port
+
+Set boot Jumper settings: Boot0=1, Boot1=0 (boot from rom). Push reset. This activates the rom bootloader.
+
+Connections:
+
+USB-serial adapter | Blue Pill | Comment
+--- | --- | ---
+RX | A9 TX1
+TX | A10 RX1
+GND | GND
+5V | 5V | Careful! Connect only one power supply.
+
+In the Arduino IDE choose *Tools->Upload Method -> STM32CubeProgrammer (Serial)* and then *Sketch->Upload*. Or from the command line:
+
+```
+stm32flash -g 0x8000000 -b 115200 -w Blink.bin /dev/ttyUSB0
+```
+Your sketch starts running automatically after upload. Push reset before compiling again.
+
+Once you're done compiling, set boot Jumper settings: Boot0=0, Boot1=0. (boot from flash).
+
+If you have a problem, a simple loopback test checks whether the USB-serial adapter works. Connect the TX and RX pins of the USB-serial adapter with jumper wire. Connect to the serial port using gtkterm or minicom. Type a few characters; observe the TX *and* RX leds blink, and the characters gets echoed on the screen.
+
+### Device Firmware Update (DFU)
+
+Device Firmware Update allows uploading firmware over USB. In many STM32 devices with a built-in USB port, you can just boot from rom, and use dfu-util to upload your firmware over USB. However, the rom bootloader of the STM32F103C8T6 is serial port only and does not support DFU.
+
+### OpenOCD
+
+If you have a Raspberry Pi, you do not need an st-link to download firmware to a Blue Pill over Serial Wire Debugging (SWD). Connect the Blue Pill directly to the Raspberry GPIO pins, and then download using [openocd](http://www.openocd.org).
+
+To install openocd, enter:
+```
+sudo apt-get install openocd
+```
+Boot Jumper settings: Boot0=0, Boot1=0 (boot from flash).
+
+Connections:
+
+| Raspberry GPIO | Blue Pill | Comment |
+| --- | --- | --- |
+| GND | GND | |
+| GPIO 24 | SWDIO ||
+| GPIO 25 | SWCLK ||
+| GPIO 18 | RST | Optional |
+| 3.3V | 3V3 | Careful! Connect only one power supply. |
+
+To learn more about using openocd, see [Programming Microcontrollers using OpenOCD on a Raspberry Pi](https://learn.adafruit.com/programming-microcontrollers-using-openocd-on-raspberry-pi/overview)
 
 ## Build notes
 To build the tools:
@@ -52,7 +147,7 @@ cd stm32duino-raspberrypi/Arduino_Tools/
 sh ./build.sh
 ls -l STM32Tools-*
 ```
-Note stlink is patched for static linking with libstlink.a . This avoids conflict if STM32Tools and /usr/bin/ have different versions of st-flash.
+st-flash is patched for static linking with libstlink.a . This avoids library version conflicts if stm32duino and /usr/bin/ have different versions of st-flash.
 
 Sometimes you need the latest version of the Arduino IDE. To build the Arduino IDE from source:
 ```
