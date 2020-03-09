@@ -19,7 +19,7 @@ https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/BoardMana
 Press OK.
 
 Open *Tools -> Board: -> Boards Manager*
-In the search field, type "STM32". Install the "STM32 Cores" board package, version 1.8.0. Installing takes about 6 minutes. Press close. Ignore any messages *Warning: forced trusting untrusted contributions*.
+In the search field, type "STM32". Install the "STM32 Cores" board package, version 1.8.0. Instalation takes about 6 minutes. Press close. Ignore any messages *Warning: forced trusting untrusted contributions*.
 
 In the Tools menu select the STM32 cores as compilation target.
 As an example, if using a STM32F103 Blue Pill choose *Tools->Board: -> Generic STM32F1 series* .
@@ -43,7 +43,7 @@ Under *Tools->Upload Method* you'll find a number of options to upload firmware.
 |HID Bootloader | hid-flash
 |Maple DFU Uploader | maple_upload
 
-First the boot jumpers are described, then each upload method is described briefly.
+First the boot jumpers are described, then the upload method are described.
 
 ### Boot jumpers
 
@@ -57,9 +57,11 @@ x | 0 | Boot from flash | 0x0800 0000
 
 These jumper settings take effect next time you boot, whether it is by pushing reset, or by power cycling, or when the processor exits the standby (sleep) mode.
 
-The rom contains a factory-programmed bootloader.  After booting from rom, you can upload firmware either over the serial port, over USB, over I2C, ... Exactly what ports can be used to upload firmware depends upon the STM32 processor model. The STM32F103C8T6 rom only supports upload over the serial port. If you have a different processor, the authoritative guide to find out how to activate the bootloader and what ports to use is STM Application note [AN2606:  STM32 microcontroller system memory boot mode](https://www.st.com/content/ccc/resource/technical/document/application_note/b9/9b/16/3a/12/1e/40/0c/CD00167594.pdf/files/CD00167594.pdf/jcr:content/translations/en.CD00167594.pdf).
+The rom contains a factory-programmed bootloader.  After booting from rom, you can upload firmware either over the serial port, over USB, over I2C, ... Exactly what ports can be used to upload firmware depends upon the STM32 processor model. The STM32F103C8T6 rom only supports upload over the serial port. 
 
 > Even if your firmware hangs, you can always change jumper settings, boot from rom, upload new firmware, and change the jumpers back to booting from flash.
+
+The authoritative guide how to activate the bootloader and what ports can be used is STM Application note [AN2606:  STM32 microcontroller system memory boot mode](https://www.st.com/content/ccc/resource/technical/document/application_note/b9/9b/16/3a/12/1e/40/0c/CD00167594.pdf/files/CD00167594.pdf/jcr:content/translations/en.CD00167594.pdf).
 
 ### Serial Wire Debugging (SWD)
 
@@ -85,7 +87,7 @@ In the Arduino IDE choose *Tools->Upload Method -> STM32CubeProgrammer (SWD)* an
 ```
 st-flash write Blink.bin 0x8000000
 ```
-where Blink.bin is the firmware, and 0x800 0000 is the start address of flash memory.
+where Blink.bin is the firmware, and 0x8000000 is the start address of flash memory.
 
 ### Serial Port
 
@@ -114,6 +116,16 @@ If you have a problem, a simple loopback test checks whether the USB-serial adap
 ### Device Firmware Update (DFU)
 
 Device Firmware Update allows uploading firmware over USB. In many STM32 devices with a built-in USB port, you can just boot from rom, and use dfu-util to upload your firmware over USB. However, the rom bootloader of the STM32F103C8T6 is serial port only and does not support DFU.
+
+### Black Magic Probe
+Black Magic firmware turns a Blue Pill into a gdb server. 
+To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debugger probe and runs the Black Magic firmware; the other Blue Pill is the target system and runs your Arduino sketch. The debugger probe is connected to the Raspberry over USB and to the target system over Converting an STM32F103 board to a Black Magic Probe (SWD).  [Source](https://github.com/blacksphere/blackmagic/wiki) See also: [Converting an STM32F103 board to a Black Magic Probe](https://medium.com/@paramaggarwal/converting-an-stm32f103-board-to-a-black-magic-probe-c013cf2cc38c).
+
+### HID Bootloader
+No special USB driver needed. Uses 2K flash on a Blue Pill. USB ID 1209:beba.  [Source](https://github.com/Serasidis/STM32_HID_Bootloader)
+
+### Maple DFU Uploader
+Software DFU implementation for devices where the bootloader rom does not support DFU. Uses 8K flash on a Blue Pill. USB ID 1eaf:0004 and 1eaf:0003. [Source](https://github.com/rogerclarkmelbourne/Arduino_STM32/wiki)
 
 ### OpenOCD
 
