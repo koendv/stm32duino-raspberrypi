@@ -1,6 +1,8 @@
---- stlink/CMakeLists.txt.ORIG	2020-03-04 09:52:49.178410600 +0100
-+++ stlink/CMakeLists.txt	2020-03-04 09:54:32.075292469 +0100
-@@ -181,18 +181,10 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 90378f9..07760e7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -185,18 +185,10 @@ endif()
  # Tools
  ###
  add_executable(st-flash src/tools/flash.c src/tools/flash_opts.c)
@@ -21,3 +23,16 @@
  
  install(TARGETS st-flash st-info
  	RUNTIME DESTINATION bin
+diff --git a/src/usb.c b/src/usb.c
+index 9df9d72..ad90baa 100644
+--- a/src/usb.c
++++ b/src/usb.c
+@@ -171,7 +171,7 @@ int _stlink_usb_version(stlink_t *sl) {
+     unsigned char* const data = sl->q_buf;
+     unsigned char* const cmd  = sl->c_buf;
+     ssize_t size;
+-    uint32_t rep_len = 6;
++    ssize_t rep_len = 6;
+     int i = fill_command(sl, SG_DXFER_FROM_DEV, rep_len);
+ 
+     cmd[i++] = STLINK_GET_VERSION;
