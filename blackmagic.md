@@ -1,9 +1,9 @@
-# Black Magic Probe on Raspberry Pi
+#Converting a Blue Pill to a Black Magic Probe
 
 This document shows how to convert a STM32F103 Blue Pill to a Black Magic Probe gdb server. 
-This allows you to download firmware to a processor over USB, set breakpoints, inspect variables, etc. 
+A Black Magic Probe allows you to download firmware to a processor over USB, set breakpoints, inspect variables, etc. 
 
-## Converting a Blue Pill to a Black Magic Probe
+## Installing firmware
 
 Install udev rules for the BMP. Go to ~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/ and run ./install.sh
 
