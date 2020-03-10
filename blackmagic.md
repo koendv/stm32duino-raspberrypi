@@ -125,6 +125,8 @@ Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect
 	 1      STM32F1 medium density M3/M4
 	(gdb) 
 
+See the [overview of useful gdb commands](https://github.com/blacksphere/blackmagic/wiki/Useful-GDB-commands) for an  introduction in using the BMP.
+
 In the Arduino IDE, choose *Tools->Upload Method-> BMP (Black Magic Probe)* to upload firmware using the BMP. The command line options to  ``arm-none-eabi-gdb`` are in the *tools.bmp_upload* section of ``.arduino15/packages/STM32/hardware/stm32/1.8.0/platform.txt``.
 
 ## See also
