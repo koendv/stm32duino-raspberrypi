@@ -35,7 +35,7 @@ case "$PROTOCOL" in
 "12"|"2")
 	# dfu
 	# $TOOLDIR/dfu-util/dfu-util -D ${FILEPATH} -d 1eaf:0003 --intf 0 --alt 1
-	$TOOLDIR/dfu-util/dfu-util -D ${FILEPATH}
+	$TOOLDIR/dfu-util/dfu-util -D ${FILEPATH} -d 1eaf:0003 --intf 0 --alt 2
 	;;
 *)
 	echo "$0: Please update this script."
