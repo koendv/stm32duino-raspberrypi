@@ -3,7 +3,8 @@
 # STM32VL has st/linkv1, which is quite different
 
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", \
-    MODE:="0666", \
+    MODE:="0664", \
+    GROUP:="dialout", \
     SYMLINK+="stlinkv2-1_%n"
 
 # If you share your linux system with other users, or just don't like the

@@ -1,2 +1,2 @@
 # STM32_HID_bootloader
-ATTRS{idProduct}=="beba", ATTRS{idVendor}=="1209", MODE:="666"
+ATTRS{idProduct}=="beba", ATTRS{idVendor}=="1209", MODE:="664", GROUP:="dialout"
