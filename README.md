@@ -119,9 +119,9 @@ Device Firmware Update allows uploading firmware over USB. In many STM32 devices
 
 ### Black Magic Probe
 Black Magic firmware turns a Blue Pill into a gdb server. 
-To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debugger probe and runs the Black Magic firmware; the other Blue Pill is the target system and runs your Arduino sketch. The debugger probe is connected to the Raspberry over USB and to the target system over Serial Wire Debugging (SWD). Apart from uploading firmware, also allows setting breakpoints, inspecting variables, etc.
+To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debugger probe and runs the Black Magic firmware; the other Blue Pill is the target system and runs your Arduino sketch. The debugger probe is connected to the Raspberry over USB and to the target system over Serial Wire Debugging (SWD). The probe can be used to upload firmware, set breakpoints, inspect variables, etc.
 
-A separate document explains how to [Convert an STM32F103 Blue Pill to a Black Magic Probe](https://github.com/koendv/stm32duino-raspberrypi/blob/master/blackmagic.md).
+This document explains how to [Convert an STM32F103 Blue Pill to a Black Magic Probe](https://github.com/koendv/stm32duino-raspberrypi/blob/master/blackmagic.md).
 
  [Source](https://github.com/blacksphere/blackmagic/wiki) 
 

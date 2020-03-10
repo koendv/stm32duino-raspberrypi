@@ -6,7 +6,7 @@ The text assumes a Raspberry Pi with Arduino IDE and stm32duino toolchain instal
 
 ## Installing firmware
 
-Install udev rules for the BMP. Go to ~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/ and run ./install.sh
+Install [udev rules for the BMP](https://github.com/blacksphere/blackmagic/blob/master/driver/99-blackmagic.rules). Go to ~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/ and run ./install.sh
 
 Clone the BMP source git and compile.
 
@@ -24,7 +24,7 @@ This creates two files, blackmagic_dfu.bin and blackmagic.bin.
 	
 First we install blackmagic_dfu.bin, the DFU bootloader. Connect the Blue Pill for serial download, with Boot0=1, Boot1=0, and connect a USB-Serial adapter with A9 to RX, A10 to TX. Press reset. Then:
 
-	~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/stm32flash -g 0x8000000 -w blackmagic_dfu.bin /dev/ttyUSB0  
+	koen@raspberrypi:~/src/blackmagic/src $ ~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/stm32flash -g 0x8000000 -w blackmagic_dfu.bin /dev/ttyUSB0  
 	stm32flash 0.5
 	
 	http://stm32flash.sourceforge.net/
@@ -48,16 +48,8 @@ First we install blackmagic_dfu.bin, the DFU bootloader. Connect the Blue Pill f
 With the bootloader installed, set BMP Boot0=0, Boot1=0. Disconnect the USB-Serial adapter. Connect the Blue Pill USB to the Raspberry.
 	
 	koen@raspberrypi:~/src/blackmagic/src $ lsusb 
-	Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-	Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-	Bus 001 Device 080: ID 1a86:7523 QinHeng Electronics HL-340 USB-Serial adapter
-	Bus 001 Device 060: ID 0482:0011 Kyocera Corp. 
-	Bus 001 Device 059: ID 04d9:1818 Holtek Semiconductor, Inc. Keyboard [Diatec Filco Majestouch 2]
-	Bus 001 Device 058: ID 046d:c05a Logitech, Inc. M90/M100 Optical Mouse
-	Bus 001 Device 057: ID 1a40:0101 Terminus Technology Inc. Hub
+	...
 	Bus 001 Device 093: ID 1d50:6017 OpenMoko, Inc. Black Magic Debug Probe (DFU)
-	Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
-	Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 	
 With the DFU bootloader running,  we download the blackmagic firmware using DFU.
 
@@ -87,16 +79,8 @@ With the DFU bootloader running,  we download the blackmagic firmware using DFU.
 	File downloaded successfully
 	Transitioning to dfuMANIFEST state
 	koen@raspberrypi:~/src/blackmagic/src $ lsusb
-	Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-	Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-	Bus 001 Device 080: ID 1a86:7523 QinHeng Electronics HL-340 USB-Serial adapter
-	Bus 001 Device 060: ID 0482:0011 Kyocera Corp. 
-	Bus 001 Device 059: ID 04d9:1818 Holtek Semiconductor, Inc. Keyboard [Diatec Filco Majestouch 2]
-	Bus 001 Device 058: ID 046d:c05a Logitech, Inc. M90/M100 Optical Mouse
-	Bus 001 Device 057: ID 1a40:0101 Terminus Technology Inc. Hub
+	...
 	Bus 001 Device 094: ID 1d50:6018 OpenMoko, Inc. Black Magic Debug Probe (Application)
-	Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
-	Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 	koen@raspberrypi:~ $ ls -l /dev/ttyBmp*
 	lrwxrwxrwx 1 root root 7 Mar  9 19:53 /dev/ttyBmpGdb -> ttyACM0
 	lrwxrwxrwx 1 root root 7 Mar  9 19:53 /dev/ttyBmpTarg -> ttyACM1
@@ -142,6 +126,9 @@ Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect
 	 1      STM32F1 medium density M3/M4
 	(gdb) 
 
-In the Arduino IDE, choose *Tools->Upload Method-> BMP (Black Magic Probe)*. 
+In the Arduino IDE, choose *Tools->Upload Method-> BMP (Black Magic Probe)*.
 
-not truncated	
+## See also
+[STM Discovery and Nucleo as Black Magic Probe](https://embdev.net/articles/STM_Discovery_and_Nucleo_as_Black_Magic_Probe#Building_Firmware_for_ST_Link_V2_Clones_and_Flash_Using_Two_Cheap_Clones)
+
+*not truncated*	
