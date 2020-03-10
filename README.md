@@ -57,7 +57,7 @@ x | 0 | Boot from flash | 0x0800 0000
 
 These jumper settings take effect next time you boot, whether it is by pushing reset, or by power cycling, or when the processor exits the standby (sleep) mode.
 
-The rom contains a factory-programmed bootloader.  After booting from rom, you can upload firmware either over the serial port, over USB, over I2C, ... Exactly what ports can be used to upload firmware depends upon the STM32 processor model. The STM32F103C8T6 rom only supports upload over the serial port. 
+The rom contains a factory-programmed bootloader.  After booting from rom, you can upload firmware either over the serial port, over USB, over I2C, ... Exactly what ports can be used to upload firmware depends upon the STM32 processor model. The STM32F103C8T6 rom only supports upload over the serial port.
 
 > Even if your firmware hangs, you can always change jumper settings, boot from rom, upload new firmware, and change the jumpers back to booting from flash.
 
@@ -117,19 +117,57 @@ If you have a problem, a simple loopback test checks whether the USB-serial adap
 
 Device Firmware Update allows uploading firmware over USB. In many STM32 devices with a built-in USB port, you can just boot from rom, and use dfu-util to upload your firmware over USB. However, the rom bootloader of the STM32F103C8T6 is serial port only and does not support DFU.
 
+There is a workaround, a software DFU implementation for devices where the bootloader rom does not support DFU. Uses 8K flash on a Blue Pill. USB ID 1eaf:0004 and 1eaf:0003.
+
+Download bootloader firmware from [Arduino_STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32/wiki)
+
+Installation:
+
+	$ stm32flash -w generic_boot20_pc13.bin /dev/ttyUSB0
+	$ lsusb
+	...
+	Bus 001 Device 040: ID 1eaf:0003
+	$ dfu-util -l
+	dfu-util 0.9
+	
+	Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+	Copyright 2010-2016 Tormod Volden and Stefan Schmidt
+	This program is Free Software and has ABSOLUTELY NO WARRANTY
+	Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+	
+	Found DFU: [1eaf:0003] ver=0201, devnum=49, cfg=1, intf=0, path="1-1.4.4", alt=2, name="STM32duino bootloader v1.0  Upload to Flash 0x8002000", serial="LLM 003"
+	Found DFU: [1eaf:0003] ver=0201, devnum=49, cfg=1, intf=0, path="1-1.4.4", alt=1, name="STM32duino bootloader v1.0  Upload to Flash 0x8005000", serial="LLM 003"
+	Found DFU: [1eaf:0003] ver=0201, devnum=49, cfg=1, intf=0, path="1-1.4.4", alt=0, name="STM32duino bootloader v1.0  ERROR. Upload to RAM not supported.", serial="LLM 003"
+	
+Stays in bootloader if jumpers set as follows: Boot0=0, Boot1=1.
+
 ### Black Magic Probe
-Black Magic firmware turns a Blue Pill into a gdb server. 
+Black Magic firmware turns a Blue Pill into a gdb server.
 To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debugger probe and runs the Black Magic firmware; the other Blue Pill is the target system and runs your Arduino sketch. The debugger probe is connected to the Raspberry over USB and to the target system over Serial Wire Debugging (SWD). The probe can be used to upload firmware, set breakpoints, inspect variables, etc.
 
 This document explains how to [Convert an STM32F103 Blue Pill to a Black Magic Probe](https://github.com/koendv/stm32duino-raspberrypi/blob/master/blackmagic.md).
 
- [Source](https://github.com/blacksphere/blackmagic/wiki) 
+ [Source](https://github.com/blacksphere/blackmagic/wiki)
 
 ### HID Bootloader
 No special USB driver needed. Uses 2K flash on a Blue Pill. USB ID 1209:beba.  [Source](https://github.com/Serasidis/STM32_HID_Bootloader)
 
+Installation:
+
+	$ stm32flash -w ./stm32_binaries/F103/low_and_medium_density/hid_generic_pc13.bin /dev/ttyUSB0
+	$ lsusb
+	...
+	Bus 001 Device 012: ID 1209:beba Generic serasidis.gr STM32 HID Bootloader
+
+Stays in bootloader if jumpers are as follows: Boot0=0, Boot1=1.
+In the Arduino IDE choose *Tools->Upload Method->HID Bootloader 2.2*.
+
 ### Maple DFU Uploader
-Software DFU implementation for devices where the bootloader rom does not support DFU. Uses 8K flash on a Blue Pill. USB ID 1eaf:0004 and 1eaf:0003. [Source](https://github.com/rogerclarkmelbourne/Arduino_STM32/wiki)
+
+Both "Tools->Upload Method->Device Firmware Update (DFU)" and "Tools->Upload Method->Maple DFU uploader" upload using the DFU protocol. The difference is how to get the device into the DFU bootloader: 
+
+* on "Device Firmware Update (DFU)" devices, setting jumper switches and pushing the reset butting boots the device in DFU mode. 
+* on "Maple DFU uploader" devices, a command-line tool ``upload_reset``boots the device in DFU mode. 
 
 ### OpenOCD
 
@@ -177,3 +215,4 @@ ant run
 The commands ``ant dist; ant run`` need to be repeated every time you modify the IDE sources. If you have not modified the IDE sources since the last run, ``ant run`` is sufficient.
 
 _not truncated._
+
