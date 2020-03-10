@@ -2,9 +2,8 @@
 
 This document shows how to convert a STM32F103 Blue Pill to a Black Magic Probe gdb server. A Black Magic Probe allows you to download firmware to a processor over USB, set breakpoints, inspect variables, etc. 
 
-The text assumes a Raspberry Pi with Arduino IDE and stm32duino toolchain installed.
-
 ## Installing firmware
+The text assumes a Raspberry Pi with Arduino IDE and stm32duino toolchain installed, and stm32flash, dfu-util and arm-none-eabi-gdb available.
 
 Install [udev rules for the BMP](https://github.com/blacksphere/blackmagic/blob/master/driver/99-blackmagic.rules). Go to ~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/ and run ./install.sh
 
@@ -96,8 +95,8 @@ Black Magic Probe  | Target  | Comment
 GND | GND |
 PB14 | SWDIO |
 PA5 | SWCLK |
-PA3 | RXD | Optional
-PA2 | TXD | Optional
+PA3 | RXD | Optional serial port
+PA2 | TXD | Optional serial port
 3V3 | 3V3 | Careful! Only connect one power source.
 
 Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect to the target system. 
@@ -126,7 +125,7 @@ Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect
 	 1      STM32F1 medium density M3/M4
 	(gdb) 
 
-In the Arduino IDE, choose *Tools->Upload Method-> BMP (Black Magic Probe)*.
+In the Arduino IDE, choose *Tools->Upload Method-> BMP (Black Magic Probe)* to upload firmware using the BMP. The command line options to  ``arm-none-eabi-gdb`` are in the *tools.bmp_upload* section of ``.arduino15/packages/STM32/hardware/stm32/1.8.0/platform.txt``.
 
 ## See also
 [STM Discovery and Nucleo as Black Magic Probe](https://embdev.net/articles/STM_Discovery_and_Nucleo_as_Black_Magic_Probe#Building_Firmware_for_ST_Link_V2_Clones_and_Flash_Using_Two_Cheap_Clones)
