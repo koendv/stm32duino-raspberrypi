@@ -141,6 +141,8 @@ Installation:
 	
 Stays in bootloader if jumpers set as follows: Boot0=0, Boot1=1.
 
+If loading the Sketch firmware at 0x8002000, one also has to link the firmware at  0x8002000.
+
 ### Black Magic Probe
 Black Magic firmware turns a Blue Pill into a gdb server.
 To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debugger probe and runs the Black Magic Probe firmware; the other Blue Pill is the target system and runs your Arduino sketch. The  Black Magic Probe (BMP) is connected to the Raspberry over USB. The target system is connected to the Black Magic Probe (BMP) over Serial Wire Debugging (SWD). The probe can be used to upload firmware, set breakpoints, inspect variables, etc.
@@ -150,7 +152,7 @@ This document explains how to [Convert an STM32F103 Blue Pill to a Black Magic P
  [Source](https://github.com/blacksphere/blackmagic/wiki)
 
 ### HID Bootloader
-No special USB driver needed. Uses 2K flash on a Blue Pill. USB ID 1209:beba.  [Source](https://github.com/Serasidis/STM32_HID_Bootloader)
+No special USB driver needed. Uses 2K flash on a Blue Pill. USB ID 1209:beba. Download bootloader firmware from [Serasidis](https://github.com/Serasidis/STM32_HID_Bootloader)
 
 Installation:
 
@@ -167,7 +169,9 @@ In the Arduino IDE choose *Tools->Upload Method->HID Bootloader 2.2*.
 Both "Tools->Upload Method->Device Firmware Update (DFU)" and "Tools->Upload Method->Maple DFU uploader" upload using the DFU protocol. The difference is how to get the device into the DFU bootloader:
 
 * on "Device Firmware Update (DFU)" devices, setting jumper switches and pushing the reset button boots the device in DFU mode.
-* on "Maple DFU uploader" devices, a command-line tool ``upload_reset``boots the device in DFU mode.
+* on "Maple DFU uploader" devices, a command-line tool ``upload-reset``boots the device in DFU mode.
+
+This corresponds to hardware differences: different electronics to reset the USB port.
 
 ### OpenOCD
 

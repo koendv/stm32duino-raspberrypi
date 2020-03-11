@@ -1,6 +1,6 @@
 # Converting a Blue Pill to a Black Magic Probe
 
-This document shows how to convert a STM32F103 Blue Pill to a Black Magic Probe gdb server. A Black Magic Probe allows you to download firmware to a processor over USB, set breakpoints, inspect variables, etc. 
+This document shows how to convert a STM32F103 Blue Pill to a Black Magic Probe gdb server. A Black Magic Probe allows you to download firmware to a processor over USB, set breakpoints, inspect variables, etc.
 
 ## Installing firmware
 The text assumes a Raspberry Pi with Arduino IDE and stm32duino toolchain installed, and stm32flash, dfu-util and arm-none-eabi-gdb available.
@@ -15,15 +15,15 @@ Clone the BMP source git and compile.
 	make PROBE_HOST=stlink
 	cd src/
 	
-This creates two files, blackmagic_dfu.bin and blackmagic.bin. 
+This creates two files, blackmagic_dfu.bin and blackmagic.bin.
 
-	koen@raspberrypi:~/src/blackmagic/src $ ls -l blackmagic_dfu.bin blackmagic.bin 
+	$ ls -l blackmagic_dfu.bin blackmagic.bin
 	-rwxr-xr-x 1 koen koen 85068 Mar  9 19:16 blackmagic.bin
 	-rwxr-xr-x 1 koen koen  7580 Mar  9 19:16 blackmagic_dfu.bin
 	
 First we install blackmagic_dfu.bin, the DFU bootloader. Connect the Blue Pill for serial download, with Boot0=1, Boot1=0, and connect a USB-Serial adapter with A9 to RX, A10 to TX. Press reset. Then:
 
-	koen@raspberrypi:~/src/blackmagic/src $ ~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/stm32flash -g 0x8000000 -w blackmagic_dfu.bin /dev/ttyUSB0  
+	$ stm32flash -g 0x8000000 -w blackmagic_dfu.bin /dev/ttyUSB0
 	stm32flash 0.5
 	
 	http://stm32flash.sourceforge.net/
@@ -46,13 +46,13 @@ First we install blackmagic_dfu.bin, the DFU bootloader. Connect the Blue Pill f
 	
 With the bootloader installed, set BMP Boot0=0, Boot1=0. Disconnect the USB-Serial adapter. Connect the Blue Pill USB to the Raspberry.
 	
-	koen@raspberrypi:~/src/blackmagic/src $ lsusb 
+	$ lsusb
 	...
 	Bus 001 Device 093: ID 1d50:6017 OpenMoko, Inc. Black Magic Debug Probe (DFU)
 	
 With the DFU bootloader running,  we download the blackmagic firmware using DFU.
 
-	koen@raspberrypi:~/src/blackmagic/src $ ~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/dfu-util/dfu-util -d 1d50:6018,:6017 -s 0x08002000:leave -D blackmagic.bin
+	$ dfu-util -d 1d50:6018,:6017 -s 0x08002000:leave -D blackmagic.bin
 	dfu-util 0.9
 	
 	Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
@@ -77,10 +77,10 @@ With the DFU bootloader running,  we download the blackmagic firmware using DFU.
 	Download done.
 	File downloaded successfully
 	Transitioning to dfuMANIFEST state
-	koen@raspberrypi:~/src/blackmagic/src $ lsusb
+	$ lsusb
 	...
 	Bus 001 Device 094: ID 1d50:6018 OpenMoko, Inc. Black Magic Debug Probe (Application)
-	koen@raspberrypi:~ $ ls -l /dev/ttyBmp*
+	$ ls -l /dev/ttyBmp*
 	lrwxrwxrwx 1 root root 7 Mar  9 19:53 /dev/ttyBmpGdb -> ttyACM0
 	lrwxrwxrwx 1 root root 7 Mar  9 19:53 /dev/ttyBmpTarg -> ttyACM1
 
@@ -99,9 +99,9 @@ PA3 | RXD | Optional serial port
 PA2 | TXD | Optional serial port
 3V3 | 3V3 | Careful! Only connect one power source.
 
-Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect to the target system. 
+Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect to the target system.
 	
-	koen@raspberrypi:~/src/blackmagic/src $ ~/.arduino15/packages/STM32/tools/xpack-arm-none-eabi-gcc/9.2.1-1.1/bin/arm-none-eabi-gdb -ex "target extended-remote /dev/ttyBmpGdb"
+	$ arm-none-eabi-gdb -ex "target extended-remote /dev/ttyBmpGdb"
 	GNU gdb (xPack GNU Arm Embedded GCC, 32-bit) 8.3.0.20190709-git
 	Copyright (C) 2019 Free Software Foundation, Inc.
 	License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -123,7 +123,7 @@ Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect
 	Available Targets:
 	No. Att Driver
 	 1      STM32F1 medium density M3/M4
-	(gdb) 
+	(gdb)
 
 See the [overview of useful gdb commands](https://github.com/blacksphere/blackmagic/wiki/Useful-GDB-commands) for an  introduction in using the BMP.
 
