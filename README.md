@@ -5,7 +5,7 @@ This is software for Raspberry Pi that allows you to develop Arduino sketches fo
 A companion hardware page explains how to [convert a Blue Pill board into a debugger probe](https://github.com/koendv/stm32duino-raspberrypi/blob/master/blackmagic.md), allowing you to download firmware from Raspberry to a Blue Pill, to set breakpoints, and inspect variables. 
 
 ## Installation
-You have an arm linux system. You have installed the Arduino IDE. Now add support for STM32 arm processors to the Arduino IDE.
+By itself, the [Arduino IDE](https://www.arduino.cc/en/Main/Software) does not support STM32 arm processors. This software adds support for STM32 arm processors to the Arduino IDE.
 
 Start and exit the Arduino IDE. This creates the directory `~/.arduino15`  in your home directory, and the file `~/.arduino15/preferences.txt`.
 

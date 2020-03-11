@@ -1,6 +1,6 @@
 # Converting a Blue Pill to a Black Magic Probe
 
-This document shows how to convert a STM32F103 Blue Pill to a Black Magic Probe gdb server. A Black Magic Probe allows you to download firmware over USB, to set breakpoints, and inspect variables.
+This document shows how to convert a STM32F103 Blue Pill to a Black Magic Probe gdb server. A Black Magic Probe (BMP) allows you to download firmware over USB, to set breakpoints, and inspect variables.
 
 ## Installing firmware
 The text assumes a Raspberry Pi with `stm32flash`, `dfu-util`,  `arm-none-eabi-gcc` and `arm-none-eabi-gdb` available.
@@ -21,6 +21,8 @@ This creates two files, `blackmagic_dfu.bin` and `blackmagic.bin`.
 	-rwxr-xr-x 1 koen koen 85068 Mar  9 19:16 blackmagic.bin
 	-rwxr-xr-x 1 koen koen  7580 Mar  9 19:16 blackmagic_dfu.bin
 	
+Given the size of the firmware, we will need a Blue Pill with at least 128kbyte of flash.
+
 First we install `blackmagic_dfu.bin`, the DFU bootloader. Connect the Blue Pill for serial download. Set boot jumpers for boot from rom: `Boot0`=1, `Boot1`=0. Connect a USB-Serial adapter with `A9` to `RX`, `A10` to `TX`. Press reset. Then:
 
 	$ stm32flash -g 0x8000000 -w blackmagic_dfu.bin /dev/ttyUSB0
@@ -84,7 +86,7 @@ With the DFU bootloader running,  we download the blackmagic firmware using DFU.
 	lrwxrwxrwx 1 root root 7 Mar  9 19:53 /dev/ttyBmpGdb -> ttyACM0
 	lrwxrwxrwx 1 root root 7 Mar  9 19:53 /dev/ttyBmpTarg -> ttyACM1
 
-If the `/dev/ttyBmpGdb` and `/dev/ttyBmpTarg` devices do not show up, check you installed `/etc/udev/rules.d/99-blackmagic.rules`.
+If the `/dev/ttyBmpGdb` and `/dev/ttyBmpTarg` devices do not show up, check  `/etc/udev/rules.d/99-blackmagic.rules` has been installed.
 
 ## Connecting to target
 
