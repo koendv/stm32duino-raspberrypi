@@ -3,9 +3,9 @@
 This document shows how to convert a STM32F103 Blue Pill to a Black Magic Probe gdb server. A Black Magic Probe allows you to download firmware to a processor over USB, set breakpoints, inspect variables, etc.
 
 ## Installing firmware
-The text assumes a Raspberry Pi with Arduino IDE and stm32duino toolchain installed, and stm32flash, dfu-util and arm-none-eabi-gdb available.
+The text assumes a Raspberry Pi with `stm32flash`, `dfu-util`,  `arm-none-eabi-gcc` and `arm-none-eabi-gdb` available.
 
-Install [udev rules for the BMP](https://github.com/blacksphere/blackmagic/blob/master/driver/99-blackmagic.rules). Go to ~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/ and run ./install.sh
+Install [udev rules for the BMP](https://github.com/blacksphere/blackmagic/blob/master/driver/99-blackmagic.rules). Go to `~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux/` and run `./install.sh`
 
 Clone the BMP source git and compile.
 
@@ -15,13 +15,13 @@ Clone the BMP source git and compile.
 	make PROBE_HOST=stlink
 	cd src/
 	
-This creates two files, blackmagic_dfu.bin and blackmagic.bin.
+This creates two files, `blackmagic_dfu.bin` and `blackmagic.bin`.
 
 	$ ls -l blackmagic_dfu.bin blackmagic.bin
 	-rwxr-xr-x 1 koen koen 85068 Mar  9 19:16 blackmagic.bin
 	-rwxr-xr-x 1 koen koen  7580 Mar  9 19:16 blackmagic_dfu.bin
 	
-First we install blackmagic_dfu.bin, the DFU bootloader. Connect the Blue Pill for serial download, with Boot0=1, Boot1=0, and connect a USB-Serial adapter with A9 to RX, A10 to TX. Press reset. Then:
+First we install `blackmagic_dfu.bin`, the DFU bootloader. Connect the Blue Pill for serial download. Set boot jumpers for boot from rom: `Boot0`=1, `Boot1`=1. Connect a USB-Serial adapter with `A9` to `RX`, `A10` to `TX`. Press reset. Then:
 
 	$ stm32flash -g 0x8000000 -w blackmagic_dfu.bin /dev/ttyUSB0
 	stm32flash 0.5
@@ -44,7 +44,7 @@ First we install blackmagic_dfu.bin, the DFU bootloader. Connect the Blue Pill f
 	
 	Starting execution at address 0x08000000... done.
 	
-With the bootloader installed, set BMP Boot0=0, Boot1=0. Disconnect the USB-Serial adapter. Connect the Blue Pill USB to the Raspberry.
+With the bootloader installed, set BMP boot jumpers to boot from flash: `Boot0`=0, `Boot1`=0. Disconnect the USB-Serial adapter. Connect the Blue Pill USB to the Raspberry.
 	
 	$ lsusb
 	...
@@ -84,7 +84,7 @@ With the DFU bootloader running,  we download the blackmagic firmware using DFU.
 	lrwxrwxrwx 1 root root 7 Mar  9 19:53 /dev/ttyBmpGdb -> ttyACM0
 	lrwxrwxrwx 1 root root 7 Mar  9 19:53 /dev/ttyBmpTarg -> ttyACM1
 
-If the two /dev/ttyBmp* devices do not show up, check you installed ``/etc/udev/rules.d/99-blackmagic.rules``.
+If the `/dev/ttyBmpGdb` and `/dev/ttyBmpTarg` devices do not show up, check you installed `/etc/udev/rules.d/99-blackmagic.rules`.
 
 ## Connecting to target
 
@@ -92,12 +92,12 @@ As target system we use another Blue Pill. Connect BMP and target like this:
 
 Black Magic Probe  | Target  | Comment
 --- | --- | ---
-GND | GND |
-PB14 | SWDIO |
-PA5 | SWCLK |
-PA3 | RXD | Optional serial port
-PA2 | TXD | Optional serial port
-3V3 | 3V3 | Careful! Only connect one power source.
+`GND` | `GND` |
+`PB14` | `SWDIO` |
+`PA5` | `SWCLK` |
+`PA3` | `RXD` | Optional serial port
+`PA2` | `TXD` | Optional serial port
+`3V3` | `3V3` | Careful! Only connect one power source.
 
 Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect to the target system.
 	
@@ -127,7 +127,7 @@ Connect the Black Magic Probe USB to the Raspberry.  Now we are ready to connect
 
 See the [overview of useful gdb commands](https://github.com/blacksphere/blackmagic/wiki/Useful-GDB-commands) for an  introduction in using the BMP.
 
-In the Arduino IDE, choose *Tools->Upload Method-> BMP (Black Magic Probe)* to upload firmware using the BMP. The command line options to  ``arm-none-eabi-gdb`` are in the *tools.bmp_upload* section of ``.arduino15/packages/STM32/hardware/stm32/1.8.0/platform.txt``.
+In the Arduino IDE, choose *Tools->Upload Method-> BMP (Black Magic Probe)* to upload firmware using the BMP. The command line options to  `arm-none-eabi-gdb` are in the *tools.bmp_upload* section of `.arduino15/packages/STM32/hardware/stm32/1.8.0/platform.txt`.
 
 ## See also
 [STM Discovery and Nucleo as Black Magic Probe](https://embdev.net/articles/STM_Discovery_and_Nucleo_as_Black_Magic_Probe#Building_Firmware_for_ST_Link_V2_Clones_and_Flash_Using_Two_Cheap_Clones)
