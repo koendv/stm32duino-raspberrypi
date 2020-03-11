@@ -1,13 +1,15 @@
 # stm32duino-raspberrypi
 
-An arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
+This is software for Raspberry Pi that allows you to develop Arduino sketches for STM32 arm boards (Blue Pill).
+
+A companion hardware page explains how to [convert a Blue Pill board into a debugger probe](https://github.com/koendv/stm32duino-raspberrypi/blob/master/blackmagic.md), allowing you to download firmware from Raspberry to a Blue Pill, to set breakpoints, and inspect variables. 
 
 ## Installation
-You have a 32-bit or 64-bit arm linux system. You have installed the Arduino IDE on the linux. Now we add support for STM32 arm processors to the Arduino IDE.
+You have an arm linux system. You have installed the Arduino IDE. Now add support for STM32 arm processors to the Arduino IDE.
 
 Start and exit the Arduino IDE. This creates the directory `~/.arduino15`  in your home directory, and the file `~/.arduino15/preferences.txt`.
 
-With the Arduino IDE not running, edit `.arduino15/preferences.txt`, and add the following line:
+With the Arduino IDE **not** running, edit `.arduino15/preferences.txt`, and add the following line:
 ```
 allow_insecure_packages=true
 ```
