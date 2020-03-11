@@ -21,7 +21,7 @@ This creates two files, `blackmagic_dfu.bin` and `blackmagic.bin`.
 	-rwxr-xr-x 1 koen koen 85068 Mar  9 19:16 blackmagic.bin
 	-rwxr-xr-x 1 koen koen  7580 Mar  9 19:16 blackmagic_dfu.bin
 	
-First we install `blackmagic_dfu.bin`, the DFU bootloader. Connect the Blue Pill for serial download. Set boot jumpers for boot from rom: `Boot0`=1, `Boot1`=1. Connect a USB-Serial adapter with `A9` to `RX`, `A10` to `TX`. Press reset. Then:
+First we install `blackmagic_dfu.bin`, the DFU bootloader. Connect the Blue Pill for serial download. Set boot jumpers for boot from rom: `Boot0`=1, `Boot1`=0. Connect a USB-Serial adapter with `A9` to `RX`, `A10` to `TX`. Press reset. Then:
 
 	$ stm32flash -g 0x8000000 -w blackmagic_dfu.bin /dev/ttyUSB0
 	stm32flash 0.5
