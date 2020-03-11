@@ -3,6 +3,7 @@
 An arduino toolchain that runs on raspberry pi and targets stm32 arm processors ("blue pill").
 
 ## Installation
+You have a 32-bit or 64-bit arm linux system. You have installed the Arduino IDE on the linux. Now we add support for STM32 arm processors to the Arduino IDE.
 
 Start and exit the Arduino IDE. This creates the directory `~/.arduino15`  in your home directory, and the file `~/.arduino15/preferences.txt`.
 
