@@ -145,6 +145,8 @@ After power-up, the Blue Pill stays in the bootloader if jumpers set as follows:
 
 If loading the Sketch firmware at 0x8002000, one also has to link the firmware at  0x8002000.
 
+If you need to [pass flags directly to the compiler](https://github.com/stm32duino/wiki/wiki/Customize-build-options-using-build_opt.h), create a file `build_opt.h` with the compiler flags.
+
 ### Black Magic Probe
 Black Magic firmware turns a Blue Pill into a gdb server.
 To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debugger probe and runs the Black Magic Probe firmware; the other Blue Pill is the target system and runs your Arduino sketch. The  Black Magic Probe (BMP) is connected to the Raspberry over USB. The target system is connected to the Black Magic Probe (BMP) over Serial Wire Debugging (SWD). The probe can be used to upload firmware, set breakpoints, inspect variables, etc.
