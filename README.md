@@ -65,6 +65,8 @@ The rom contains a factory-programmed bootloader.  After booting from rom, you c
 
 The authoritative guide how to activate the bootloader and what ports can be used is STM Application note [AN2606:  STM32 microcontroller system memory boot mode](https://www.st.com/content/ccc/resource/technical/document/application_note/b9/9b/16/3a/12/1e/40/0c/CD00167594.pdf/files/CD00167594.pdf/jcr:content/translations/en.CD00167594.pdf).
 
+If you need to [pass flags directly to the compiler](https://github.com/stm32duino/wiki/wiki/Customize-build-options-using-build_opt.h), create a file `build_opt.h` with the compiler and linker flags.
+
 ### Serial Wire Debugging (SWD)
 
 Serial Wire Debugging uses two STM32 pins, `SWCLK` (`PA14`) and `SWDIO` (`PA13`). Connect raspberry and Blue Pill using a st-link adapter.
@@ -144,8 +146,6 @@ Installation:
 After power-up, the Blue Pill stays in the bootloader if jumpers set as follows: `Boot0`=0, `Boot1`=1.
 
 If loading the Sketch firmware at 0x8002000, one also has to link the firmware at  0x8002000.
-
-If you need to [pass flags directly to the compiler](https://github.com/stm32duino/wiki/wiki/Customize-build-options-using-build_opt.h), create a file `build_opt.h` with the compiler flags.
 
 ### Black Magic Probe
 Black Magic firmware turns a Blue Pill into a gdb server.
