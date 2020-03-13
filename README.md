@@ -32,6 +32,8 @@ Run the shell script `install.sh` in the tools directory to install udev rules a
 
 If needed, edit the shell script `stm32CubeProg.sh` in the tools directory to change the command line options of the STM32CubeProgrammer firmware upload commands.
 
+If you need to [pass flags directly to the compiler](https://github.com/stm32duino/wiki/wiki/Customize-build-options-using-build_opt.h), create a file `build_opt.h` with the compiler and linker flags.
+
 ## Description
 
 Under *Tools->Upload Method* you'll find a number of options to upload firmware.
@@ -64,8 +66,6 @@ The rom contains a factory-programmed bootloader.  After booting from rom, you c
 > Even if your firmware hangs, you can always change jumper settings, boot from rom, upload new firmware, and change the jumpers back to booting from flash.
 
 The authoritative guide how to activate the bootloader and what ports can be used is STM Application note [AN2606:  STM32 microcontroller system memory boot mode](https://www.st.com/content/ccc/resource/technical/document/application_note/b9/9b/16/3a/12/1e/40/0c/CD00167594.pdf/files/CD00167594.pdf/jcr:content/translations/en.CD00167594.pdf).
-
-If you need to [pass flags directly to the compiler](https://github.com/stm32duino/wiki/wiki/Customize-build-options-using-build_opt.h), create a file `build_opt.h` with the compiler and linker flags.
 
 ### Serial Wire Debugging (SWD)
 
