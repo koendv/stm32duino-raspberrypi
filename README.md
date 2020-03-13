@@ -149,13 +149,13 @@ If loading the Sketch firmware at 0x8002000, one also has to link the firmware a
 
 ### Black Magic Probe
 Black Magic firmware turns a Blue Pill into a gdb server.
-To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debugger probe and runs the Black Magic Probe firmware; the other Blue Pill is the target system and runs your Arduino sketch. The  Black Magic Probe (BMP) is connected to the Raspberry over USB. The target system is connected to the Black Magic Probe (BMP) over Serial Wire Debugging (SWD). The probe can be used to upload firmware, set breakpoints, inspect variables, etc.
+To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debugger probe and runs the Black Magic Probe firmware; the other Blue Pill is the target system and runs your Arduino sketch. The  Black Magic Probe (BMP) is connected to the Raspberry over USB. The target system is connected to the Black Magic Probe (BMP) over Serial Wire Debugging (SWD). The probe can be used to upload firmware, set breakpoints, inspect variables, etc.  Select *Tools->Optimize->Debug (-g)*, else `gdb` may not know names of variables and functions, or line numbers (no symbol table). 
 
 This document explains how to [Convert an STM32F103 Blue Pill to a Black Magic Probe](https://github.com/koendv/stm32duino-raspberrypi/blob/master/blackmagic.md).
 
  [Source](https://github.com/blacksphere/blackmagic/wiki)
  
-You need to [patch platform.txt](https://github.com/stm32duino/Arduino_Core_STM32/issues/986) for Black Magic Probe to work on STM Core 1.8.0
+You need to [patch platform.txt](https://github.com/koendv/stm32duino-raspberrypi/blob/master/Arduino_Tools/patch/STM32-1.8.0-platform.txt.patch) for Black Magic Probe to work on STM Core 1.8.0.
 
 ### HID Bootloader
 No special USB driver needed. The HID bootloader uses 2K flash on a Blue Pill. USB ID 1209:beba. Download bootloader firmware from [Serasidis](https://github.com/Serasidis/STM32_HID_Bootloader)
