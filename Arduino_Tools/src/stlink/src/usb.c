@@ -171,7 +171,7 @@ int _stlink_usb_version(stlink_t *sl) {
     unsigned char* const data = sl->q_buf;
     unsigned char* const cmd  = sl->c_buf;
     ssize_t size;
-    ssize_t rep_len = 6;
+    uint32_t rep_len = 6;
     int i = fill_command(sl, SG_DXFER_FROM_DEV, rep_len);
 
     cmd[i++] = STLINK_GET_VERSION;
@@ -189,7 +189,7 @@ int _stlink_usb_version(stlink_t *sl) {
         cmd[i++] = STLINK_APIV3_GET_VERSION_EX;
 
         size = send_recv(slu, 1, cmd, slu->cmd_len, data, rep_len);
-        if (size != rep_len) {
+        if (size != (ssize_t)rep_len) {
             printf("[!] send_recv STLINK_APIV3_GET_VERSION_EX\n");
             return (int) size;
         }

@@ -1,0 +1,18 @@
+--- upload-reset/upload-reset.c.ORIG	2020-03-16 12:53:24.349069124 +0100
++++ upload-reset/upload-reset.c	2020-03-16 12:53:44.164697225 +0100
+@@ -118,13 +118,13 @@
+  * Maple and Maple mini boards 
+  */
+ 
+-main(int argc, char *argv[])
++int main(int argc, char *argv[])
+ {
+  	
+ 	if (argc<2 || argc >3)
+ 	{
+ 		printf("Usage upload-reset <serial_device> <Optional_delay_in_milliseconds>\n\r");
+-		return;
++		return 0;
+ 	}
+ 
+  	if (openserial(argv[1]))

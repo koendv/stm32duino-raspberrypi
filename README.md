@@ -123,7 +123,7 @@ Device Firmware Update allows uploading firmware over USB. In many STM32 devices
 
 There is a workaround, a software DFU implementation for devices where the bootloader rom does not support DFU. This bootloader uses 8K flash on a Blue Pill. USB ID 1eaf:0004 and 1eaf:0003.
 
-Download bootloader firmware from [Arduino_STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32/wiki)
+Download bootloader firmware from [STM32duino-bootloader](https://github.com/rogerclarkmelbourne/STM32duino-bootloader)
 
 Installation:
 

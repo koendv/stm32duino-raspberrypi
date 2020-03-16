@@ -1,8 +1,7 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 90378f9..07760e7 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -185,18 +185,10 @@ endif()
+diff -urN stlink.ORIG/CMakeLists.txt stlink/CMakeLists.txt
+--- stlink.ORIG/CMakeLists.txt	2020-02-27 01:56:59.000000000 +0100
++++ stlink/CMakeLists.txt	2020-03-13 09:04:49.200305243 +0100
+@@ -185,18 +185,10 @@
  # Tools
  ###
  add_executable(st-flash src/tools/flash.c src/tools/flash_opts.c)
@@ -23,16 +22,15 @@ index 90378f9..07760e7 100644
  
  install(TARGETS st-flash st-info
  	RUNTIME DESTINATION bin
-diff --git a/src/usb.c b/src/usb.c
-index 9df9d72..ad90baa 100644
---- a/src/usb.c
-+++ b/src/usb.c
-@@ -171,7 +171,7 @@ int _stlink_usb_version(stlink_t *sl) {
-     unsigned char* const data = sl->q_buf;
-     unsigned char* const cmd  = sl->c_buf;
-     ssize_t size;
--    uint32_t rep_len = 6;
-+    ssize_t rep_len = 6;
-     int i = fill_command(sl, SG_DXFER_FROM_DEV, rep_len);
+diff -urN stlink.ORIG/src/usb.c stlink/src/usb.c
+--- stlink.ORIG/src/usb.c	2020-02-27 01:56:59.000000000 +0100
++++ stlink/src/usb.c	2020-03-16 12:55:28.750739499 +0100
+@@ -189,7 +189,7 @@
+         cmd[i++] = STLINK_APIV3_GET_VERSION_EX;
  
-     cmd[i++] = STLINK_GET_VERSION;
+         size = send_recv(slu, 1, cmd, slu->cmd_len, data, rep_len);
+-        if (size != rep_len) {
++        if (size != (ssize_t)rep_len) {
+             printf("[!] send_recv STLINK_APIV3_GET_VERSION_EX\n");
+             return (int) size;
+         }

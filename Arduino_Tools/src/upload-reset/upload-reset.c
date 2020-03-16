@@ -118,13 +118,13 @@ int setDTR(unsigned short level)
  * Maple and Maple mini boards 
  */
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
  	
 	if (argc<2 || argc >3)
 	{
 		printf("Usage upload-reset <serial_device> <Optional_delay_in_milliseconds>\n\r");
-		return;
+		return 0;
 	}
 
  	if (openserial(argv[1]))
