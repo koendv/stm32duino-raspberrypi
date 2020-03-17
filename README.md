@@ -205,7 +205,7 @@ To learn more about using openocd, see [Programming Microcontrollers using OpenO
 To build the tools:
 ```
 apt-get update
-apt-get install build-essential git libusb-1.0-0-dev autotools-dev autoconf automake cmake
+apt-get install build-essential git libusb-1.0-0-dev autotools-dev autoconf automake cmake pkg-config
 git clone https://github.com/koendv/stm32duino-raspberrypi
 cd stm32duino-raspberrypi/Arduino_Tools/
 sh ./build.sh
