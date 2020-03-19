@@ -22,6 +22,22 @@ diff -urN stlink.ORIG/CMakeLists.txt stlink/CMakeLists.txt
  
  install(TARGETS st-flash st-info
  	RUNTIME DESTINATION bin
+diff -urN stlink.ORIG/src/gdbserver/CMakeLists.txt stlink/src/gdbserver/CMakeLists.txt
+--- stlink.ORIG/src/gdbserver/CMakeLists.txt	2020-03-19 21:21:16.573118336 +0100
++++ stlink/src/gdbserver/CMakeLists.txt	2020-03-19 21:22:01.752387822 +0100
+@@ -13,11 +13,7 @@
+ 
+ add_executable(st-util ${STUTIL_SOURCE})
+ 
+-if (WIN32 OR APPLE)
+-	target_link_libraries(st-util ${STLINK_LIB_STATIC})
+-else()
+-	target_link_libraries(st-util ${STLINK_LIB_SHARED})
+-endif()
++target_link_libraries(st-util ${STLINK_LIB_STATIC})
+ 
+ install(TARGETS st-util
+ 	RUNTIME DESTINATION bin
 diff -urN stlink.ORIG/src/usb.c stlink/src/usb.c
 --- stlink.ORIG/src/usb.c	2020-02-27 01:56:59.000000000 +0100
 +++ stlink/src/usb.c	2020-03-16 12:55:28.750739499 +0100

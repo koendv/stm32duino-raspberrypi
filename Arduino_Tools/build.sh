@@ -29,6 +29,7 @@ cd stlink
 make
 install build/Release/st-flash $TOOLDIR
 install build/Release/st-info $TOOLDIR
+install build/Release/src/gdbserver/st-util $TOOLDIR
 #make clean
 cd $SRCDIR
 
