@@ -3,7 +3,7 @@
     {
       "name": "STM32",
       "websiteURL": "http://www.st.com/en/microcontrollers.html",
-      "maintainer": "STMicroelectronics",
+      "maintainer": "koendv",
       "email": "",
       "help": {
         "online": "http://www.stm32duino.com/"
