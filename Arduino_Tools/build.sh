@@ -44,7 +44,8 @@ install upload-reset $TOOLDIR
 cd $SRCDIR
 
 cd $TOPDIR
-tar cf STM32Tools-$VERSION-arm-linux.tar STM32Tools
-bzip2 --best STM32Tools-$VERSION-arm-linux.tar
+tar cf STM32Tools-$VERSION-linux.tar STM32Tools
+rm -f STM32Tools-$VERSION-linux.tar.bz2
+bzip2 --best STM32Tools-$VERSION-linux.tar
 
 #not truncated
