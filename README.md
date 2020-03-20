@@ -153,9 +153,9 @@ To use the Black Magic Probe, you need two Blue Pills. One Blue Pill is the debu
 
 This document explains how to [convert an STM32F103 Blue Pill to a Black Magic Probe](https://github.com/koendv/stm32duino-raspberrypi/blob/master/blackmagic.md).
 
-You need to [patch platform.txt](https://github.com/koendv/stm32duino-raspberrypi/blob/master/Arduino_Tools/patch/STM32-1.8.0-platform.txt.patch) for Black Magic Probe to work on STM Core 1.8.0.
+You need to [patch platform.txt](https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/Arduino_Tools/patch/STM32-1.8.0-platform.txt.patch) for Black Magic Probe to work on STM Core 1.8.0.
 
- [Black Magic Probe Wiki](https://github.com/blacksphere/blackmagic/wiki)
+For information see the  [Black Magic Probe Wiki](https://github.com/blacksphere/blackmagic/wiki)
  
 ### HID Bootloader
 No special USB driver needed. The HID bootloader uses 2K flash on a Blue Pill. USB ID 1209:beba. Download bootloader firmware from [Serasidis](https://github.com/Serasidis/STM32_HID_Bootloader)

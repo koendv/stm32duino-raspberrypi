@@ -1,5 +1,14 @@
---- package_stm_index.json.ORIG	2020-03-20 16:21:33.951227587 +0100
-+++ package_stm_index.json	2020-03-20 16:28:47.433436231 +0100
+--- package_stm_index.json.ORIG	2020-03-20 19:50:35.714611932 +0100
++++ package_stm_index.json	2020-03-20 19:49:30.435546280 +0100
+@@ -3,7 +3,7 @@
+     {
+       "name": "STM32",
+       "websiteURL": "http://www.st.com/en/microcontrollers.html",
+-      "maintainer": "STMicroelectronics",
++      "maintainer": "koendv",
+       "email": "",
+       "help": {
+         "online": "http://www.stm32duino.com/"
 @@ -1052,6 +1052,20 @@
                "archiveFileName": "xpack-arm-none-eabi-gcc-9.2.1-1.1-linux-x32.tar.gz",
                "checksum": "SHA-256:e9f4b5f3ebe7e4391e2423e4106493d7cfcdee9eee4a1f0766f1c23662093a49",
@@ -43,7 +52,7 @@
 -              "archiveFileName": "STM32Tools-1.3.2-linux.tar.bz2",
 -              "checksum": "SHA-256:ba62b6261d9870db5e359feb72efd9a6cc99b1a966054e547432a9dac9295254",
 -              "size": "995993"
-+              "url": "https://github.com/stm32duino/Arduino_Tools/releases/download/1.3.2-4/STM32Tools-1.3.2-amd64-linux.tar.bz2",
++              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/v1.3.2-4/STM32Tools-1.3.2-amd64-linux.tar.bz2",
 +              "archiveFileName": "STM32Tools-1.3.2-amd64-linux.tar.bz2",
 +              "checksum": "SHA-256:690de226210ba8b4a28e41bba6428ca11fca3351580b0b7a92dfb12bb27055ef",
 +              "size": "543301"
@@ -54,7 +63,7 @@
 -              "archiveFileName": "STM32Tools-1.3.2-linux.tar.bz2",
 -              "checksum": "SHA-256:ba62b6261d9870db5e359feb72efd9a6cc99b1a966054e547432a9dac9295254",
 -              "size": "995993"
-+              "url": "https://github.com/stm32duino/Arduino_Tools/releases/download/1.3.2-4/STM32Tools-1.3.2-i386-linux.tar.bz2",
++              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/v1.3.2-4/STM32Tools-1.3.2-i386-linux.tar.bz2",
 +              "archiveFileName": "STM32Tools-1.3.2-i386-linux.tar.bz2",
 +              "checksum": "SHA-256:7704f65f88aa7a32460447e75f4a6c3c945b1d205150589dac76bddb403e482b",
 +              "size": "506155"
