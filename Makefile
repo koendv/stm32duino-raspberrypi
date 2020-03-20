@@ -1,5 +1,6 @@
 #
 # Makefile for opensuse build service
+# https://build.opensuse.org/package/show/home:koendv/stm32duino-raspberrypi
 #
 build:
 	pwd; cd Arduino_Tools; sh ./build.sh
