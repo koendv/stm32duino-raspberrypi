@@ -1685,8 +1685,8 @@
             },
             {
               "host": "arm-linux-gnueabihf",
-              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/v1.3.2-4/STM32Tools-1.3.2-arm-linux.tar.bz2",
-              "archiveFileName": "STM32Tools-1.3.2-arm-linux.tar.bz2",
+              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/v1.3.2-4/STM32Tools-1.3.2-armhf-linux.tar.bz2",
+              "archiveFileName": "STM32Tools-1.3.2-armhf-linux.tar.bz2",
               "checksum": "SHA-256:faaf4ea45b2fba03c4ac64c73216cafbbd798acbefaab65dda0eb233f4ac015a",
               "size": "596875"
             }
