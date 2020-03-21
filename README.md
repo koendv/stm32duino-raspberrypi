@@ -119,7 +119,7 @@ If you have a problem, a simple loopback test checks whether the USB-serial adap
 
 ### Device Firmware Update (DFU)
 
-Device Firmware Update allows uploading firmware over USB. In many STM32 devices with a built-in USB port, you can just boot from rom, and use `dfu-util` to upload your firmware over USB. However, the rom bootloader of the STM32F103C8T6 is serial port only and does not support DFU.
+Device Firmware Update allows uploading firmware over USB. A device like the STM32F401 has a built-in USB port, and you can just boot from rom, and use `dfu-util` to upload your firmware over USB. A device like the STM32F103C8T6 also has a built-in USB port, but the rom bootloader of the STM32F103C8T6 is serial port only and does not support DFU.
 
 There is a workaround, a software DFU implementation for devices where the bootloader rom does not support DFU. This bootloader uses 8K flash on a Blue Pill. USB ID 1eaf:0004 and 1eaf:0003.
 
@@ -156,7 +156,7 @@ This document explains how to [convert an STM32F103 Blue Pill to a Black Magic P
 You need to [patch platform.txt](https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/Arduino_Tools/patch/STM32-1.8.0-platform.txt.patch) for Black Magic Probe to work on STM Core 1.8.0.
 
 For information see the  [Black Magic Probe Wiki](https://github.com/blacksphere/blackmagic/wiki)
- 
+  
 ### HID Bootloader
 No special USB driver needed. The HID bootloader uses 2K flash on a Blue Pill. USB ID 1209:beba. Download bootloader firmware from [Serasidis](https://github.com/Serasidis/STM32_HID_Bootloader)
 
@@ -202,6 +202,7 @@ Connections:
 To learn more about using openocd, see [Programming Microcontrollers using OpenOCD on a Raspberry Pi](https://learn.adafruit.com/programming-microcontrollers-using-openocd-on-raspberry-pi/overview)
 
 ## Build notes
+
 To build the tools:
 ```
 apt-get update
@@ -212,6 +213,8 @@ sh ./build.sh
 ls -l STM32Tools-*
 ```
 `st-flash` is patched for static linking with `libstlink.a` . This avoids library version conflicts if stm32duino and `/usr/bin/` have different versions of `st-flash`.
+
+The release binaries are built for arm linux (32 and 64 bit) and intel linux (32 and 64 bit) at [opensuse build service](https://build.opensuse.org/package/show/home:koendv/stm32duino-raspberrypi).
 
 Sometimes you need the latest version of the Arduino IDE. To build the Arduino IDE from source:
 ```
