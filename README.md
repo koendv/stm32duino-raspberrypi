@@ -2,7 +2,7 @@
 
 This is software for Raspberry Pi that allows you to develop Arduino sketches for STM32 arm boards (Blue Pill).
 
-A companion hardware page explains how to [convert a Blue Pill board into a debugger probe](https://github.com/koendv/stm32duino-raspberrypi/blob/master/blackmagic.md), allowing you to download firmware from Raspberry to a Blue Pill, to set breakpoints, and inspect variables. 
+A companion hardware page explains how to [convert a Blue Pill board into a debugger probe](https://github.com/koendv/blackmagic-bluepill/blob/master/README.md), allowing you to download firmware from Raspberry to a Blue Pill, to set breakpoints, and inspect variables. 
 
 ## Installation
 By itself, the [Arduino IDE](https://www.arduino.cc/en/Main/Software) does not support STM32 arm processors. This software for arm linux adds support for STM32 arm processors to the Arduino IDE.
