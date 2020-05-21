@@ -1922,17 +1922,17 @@
             },
             {
               "host": "aarch64-linux-gnu",
-              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/v1.3.2-4/STM32Tools-1.3.2-arm64-linux.tar.bz2",
-              "archiveFileName": "STM32Tools-1.3.2-arm64-linux.tar.bz2",
-              "checksum": "SHA-256:891210ee67db5ce3ff87de52624f188e77e1769b01233b3327f81755507057e1",
-              "size": "616045"
+              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/1.4.0-0/STM32Tools-1.4.0-arm64-linux.tar.bz2",
+              "archiveFileName": "STM32Tools-1.4.0-arm64-linux.tar.bz2",
+              "checksum": "SHA-256:d79b62aca21c2e3db2b57113d991121ba3c2a53ad229e5ad2b235abe9bf20c1a",
+              "size": "655770"
             },
             {
               "host": "arm-linux-gnueabihf",
-              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/v1.3.2-4/STM32Tools-1.3.2-armhf-linux.tar.bz2",
-              "archiveFileName": "STM32Tools-1.3.2-armhf-linux.tar.bz2",
-              "checksum": "SHA-256:faaf4ea45b2fba03c4ac64c73216cafbbd798acbefaab65dda0eb233f4ac015a",
-              "size": "596875"
+              "url": "https://github.com/koendv/stm32duino-raspberrypi/releases/download/1.4.0-0/STM32Tools-1.4.0-armhf-linux.tar.bz2",
+              "archiveFileName": "STM32Tools-1.4.0-armhf-linux.tar.bz2",
+              "checksum": "SHA-256:9b02f7070940cbe5ec780857bbc2a97e984d25e16968a321d31581f2b154f1e3",
+              "size": "632165"
             }
           ]
         }
