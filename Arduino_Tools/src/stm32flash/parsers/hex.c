@@ -27,6 +27,7 @@
 #include <string.h>
 
 #include "hex.h"
+#include "../compiler.h"
 #include "../utils.h"
 
 typedef struct {
@@ -45,9 +46,9 @@ parser_err_t hex_open(void *storage, const char *filename, const char write) {
 		return PARSER_ERR_RDONLY;
 	} else {
 		char mark;
-		int i, fd;
+		int fd;
 		uint8_t checksum;
-		unsigned int c;
+		unsigned int c, i;
 		uint32_t base = 0;
 		unsigned int last_address = 0x0;
 
@@ -153,6 +154,7 @@ parser_err_t hex_open(void *storage, const char *filename, const char write) {
 
 				/* address record */
 				case 4:	base = base << 12;
+					/* fall-through */
 				case 2: base = base << 4;
 					/* Reset last_address since our base changed */
 					last_address = 0;
@@ -213,7 +215,7 @@ parser_err_t hex_read(void *storage, void *data, unsigned int *len) {
 	return PARSER_ERR_OK;
 }
 
-parser_err_t hex_write(void *storage, void *data, unsigned int len) {
+parser_err_t hex_write(void __unused *storage, void __unused *data, unsigned int __unused len) {
 	return PARSER_ERR_RDONLY;
 }
 

@@ -28,10 +28,15 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
+
+#include "compiler.h"
 #include "init.h"
 #include "serial.h"
 #include "stm32.h"
 #include "port.h"
+#include "utils.h"
+
+extern FILE *diag;
 
 struct gpio_list {
 	struct gpio_list *next;
@@ -40,6 +45,7 @@ struct gpio_list {
 	int exported; /* 0 if gpio should be unexported. */
 };
 
+#if defined(__linux__)
 static int write_to(const char *filename, const char *value)
 {
 	int fd, ret;
@@ -59,17 +65,10 @@ static int write_to(const char *filename, const char *value)
 	return 1;
 }
 
-#if !defined(__linux__)
-static int drive_gpio(int n, int level, struct gpio_list **gpio_to_release)
-{
-	fprintf(stderr, "GPIO control only available in Linux\n");
-	return 0;
-}
-#else
 static int read_from(const char *filename, char *buf, size_t len)
 {
 	int fd, ret;
-	ssize_t n = 0;
+	size_t n = 0;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0) {
@@ -142,7 +141,6 @@ static int drive_gpio(int n, int level, struct gpio_list **gpio_to_release)
 
 	return write_to(file, level ? "high" : "low");
 }
-#endif
 
 static int release_gpio(int n, int input, int exported)
 {
@@ -159,14 +157,34 @@ static int release_gpio(int n, int input, int exported)
 
 	return 1;
 }
-
-static int gpio_sequence(struct port_interface *port, const char *s, size_t l)
+#else
+static int drive_gpio(int __unused n, int __unused level,
+		      struct gpio_list __unused **gpio_to_release)
 {
-	struct gpio_list *gpio_to_release = NULL, *to_free;
-	int ret, level, gpio;
+	fprintf(stderr, "GPIO control only available in Linux\n");
+	return 0;
+}
+#endif
 
-	ret = 1;
-	while (ret == 1 && *s && l > 0) {
+static int gpio_sequence(struct port_interface *port, const char *seq, size_t len_seq)
+{
+	struct gpio_list *gpio_to_release = NULL;
+#if defined(__linux__)
+	struct gpio_list *to_free;
+#endif
+	int ret = 0, level, gpio;
+	int sleep_time = 0;
+	int delimiter = 0;
+	const char *sig_str = NULL;
+	const char *s = seq;
+	size_t l = len_seq;
+
+	fprintf(diag, "\nGPIO sequence start\n");
+	while (ret == 0 && *s && l > 0) {
+		sig_str = NULL;
+		sleep_time = 0;
+		delimiter = 0;
+
 		if (*s == '-') {
 			level = 0;
 			s++;
@@ -180,48 +198,78 @@ static int gpio_sequence(struct port_interface *port, const char *s, size_t l)
 				s++;
 				l--;
 			}
-		} else if (!strncmp(s, "rts", 3)) {
+		} else if (l >= 3 && !strncmp(s, "rts", 3)) {
+			sig_str = s;
 			gpio = -GPIO_RTS;
 			s += 3;
 			l -= 3;
-		} else if (!strncmp(s, "dtr", 3)) {
+		} else if (l >= 3 && !strncmp(s, "dtr", 3)) {
+			sig_str = s;
 			gpio = -GPIO_DTR;
 			s += 3;
 			l -= 3;
-		} else if (!strncmp(s, "brk", 3)) {
+		} else if (l >= 3 && !strncmp(s, "brk", 3)) {
+			sig_str = s;
 			gpio = -GPIO_BRK;
 			s += 3;
 			l -= 3;
-		} else {
-			fprintf(stderr, "Character \'%c\' is not a digit\n", *s);
-			ret = 0;
-			break;
-		}
-
-		if (*s && (l > 0)) {
+		} else if (*s && (l > 0)) {
+			delimiter = 1;
+			/* The ',' delimiter adds a 100 ms delay between signal toggles.
+			 * i.e -rts,dtr will reset rts, wait 100 ms, set dtr.
+			 *
+			 * The '&' delimiter adds no delay between signal toggles.
+			 * i.e -rts&dtr will reset rts and immediately set dtr.
+			 *
+			 * Example: -rts&dtr,,,rts,-dtr will reset rts and set dtr
+			 * without delay, then wait 300 ms, set rts, wait 100 ms, reset dtr.
+			 */
 			if (*s == ',') {
 				s++;
 				l--;
+				sleep_time = 100000;
+			} else if (*s == '&') {
+				s++;
+				l--;
 			} else {
-				fprintf(stderr, "Character \'%c\' is not a separator\n", *s);
-				ret = 0;
+				fprintf(stderr, "Character \'%c\' is not a valid signal or separator\n", *s);
+				ret = 1;
 				break;
 			}
+		} else {
+			/* E.g. modifier without signal */
+			fprintf(stderr, "Invalid sequence %.*s\n", (int) len_seq, seq);
+			ret = 1;
+			break;
 		}
-		if (gpio < 0)
-			ret = (port->gpio(port, -gpio, level) == PORT_ERR_OK);
-		else
-			ret = drive_gpio(gpio, level, &gpio_to_release);
-		usleep(100000);
-	}
 
+		if (!delimiter) { /* actual gpio/port signal driving */
+			if (gpio < 0) {
+				gpio = -gpio;
+				fprintf(diag, " setting port signal %.3s to %i... ", sig_str, level);
+				ret = (port->gpio(port, gpio, level) != PORT_ERR_OK);
+				printStatus(diag, ret);
+			} else {
+				fprintf(diag, " setting gpio %i to %i... ", gpio, level);
+				ret = (drive_gpio(gpio, level, &gpio_to_release) != 1);
+				printStatus(diag, ret);
+			}
+		}
+
+		if (sleep_time) {
+			fprintf(diag, " delay %i us\n", sleep_time);
+			usleep(sleep_time);
+		}
+	}
+#if defined(__linux__)
 	while (gpio_to_release) {
 		release_gpio(gpio_to_release->gpio, gpio_to_release->input, gpio_to_release->exported);
 		to_free = gpio_to_release;
 		gpio_to_release = gpio_to_release->next;
 		free(to_free);
 	}
-	usleep(500000);
+#endif
+	fprintf(diag, "GPIO sequence end\n\n");
 	return ret;
 }
 
@@ -239,7 +287,7 @@ static int gpio_bl_entry(struct port_interface *port, const char *seq)
 	return gpio_sequence(port, seq, s - seq);
 }
 
-static int gpio_bl_exit(struct port_interface *port, const char *seq)
+int gpio_bl_exit(struct port_interface *port, const char *seq)
 {
 	char *s;
 
@@ -258,7 +306,7 @@ int init_bl_entry(struct port_interface *port, const char *seq)
 	if (seq)
 		return gpio_bl_entry(port, seq);
 
-	return 1;
+	return 0;
 }
 
 int init_bl_exit(stm32_t *stm, struct port_interface *port, const char *seq)
@@ -266,7 +314,5 @@ int init_bl_exit(stm32_t *stm, struct port_interface *port, const char *seq)
 	if (seq && strchr(seq, ':'))
 		return gpio_bl_exit(port, seq);
 
-	if (stm32_reset_device(stm) != STM32_ERR_OK)
-		return 0;
-	return 1;
+	return stm32_reset_device(stm);
 }

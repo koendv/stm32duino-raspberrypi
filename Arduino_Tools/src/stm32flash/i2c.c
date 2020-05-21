@@ -28,14 +28,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#include "compiler.h"
 #include "serial.h"
 #include "port.h"
 
 
 #if !defined(__linux__)
 
-static port_err_t i2c_open(struct port_interface *port,
-			   struct port_options *ops)
+static port_err_t i2c_open(struct port_interface __unused *port,
+			   struct port_options __unused *ops)
 {
 	return PORT_ERR_NODEV;
 }
@@ -149,7 +150,7 @@ static port_err_t i2c_read(struct port_interface *port, void *buf,
 	if (h == NULL)
 		return PORT_ERR_UNKNOWN;
 	ret = read(h->fd, buf, nbyte);
-	if (ret != nbyte)
+	if (ret != (int)nbyte)
 		return PORT_ERR_UNKNOWN;
 	return PORT_ERR_OK;
 }
@@ -164,13 +165,14 @@ static port_err_t i2c_write(struct port_interface *port, void *buf,
 	if (h == NULL)
 		return PORT_ERR_UNKNOWN;
 	ret = write(h->fd, buf, nbyte);
-	if (ret != nbyte)
+	if (ret != (int)nbyte)
 		return PORT_ERR_UNKNOWN;
 	return PORT_ERR_OK;
 }
 
-static port_err_t i2c_gpio(struct port_interface *port, serial_gpio_t n,
-			   int level)
+static port_err_t i2c_gpio(struct port_interface __unused *port,
+			   serial_gpio_t __unused n,
+			   int __unused level)
 {
 	return PORT_ERR_OK;
 }
@@ -194,11 +196,18 @@ static struct varlen_cmd i2c_cmd_get_reply[] = {
 	{ /* sentinel */ }
 };
 
+static port_err_t i2c_flush(struct port_interface __unused *port)
+{
+	/* We shouldn't need to flush I2C */
+	return PORT_ERR_OK;
+}
+
 struct port_interface port_i2c = {
 	.name	= "i2c",
 	.flags	= PORT_STRETCH_W,
 	.open	= i2c_open,
 	.close	= i2c_close,
+	.flush  = i2c_flush,
 	.read	= i2c_read,
 	.write	= i2c_write,
 	.gpio	= i2c_gpio,

@@ -27,9 +27,16 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <stdio.h>
+#include <sys/file.h>
 
 #include "serial.h"
 #include "port.h"
+
+#ifndef TERMIOS_TIMEOUT_MS
+#define TERMIOS_TIMEOUT_MS 500
+#endif
+
+#define TERMIOS_TIMEOUT ((TERMIOS_TIMEOUT_MS)/100)
 
 struct serial {
 	int fd;
@@ -44,6 +51,13 @@ static serial_t *serial_open(const char *device)
 
 	h->fd = open(device, O_RDWR | O_NOCTTY | O_NDELAY);
 	if (h->fd < 0) {
+		free(h);
+		return NULL;
+	}
+
+	if(lockf(h->fd,F_TLOCK,0) != 0)
+	{
+		fprintf(stderr, "Error: %s is already open\n", device);
 		free(h);
 		return NULL;
 	}
@@ -64,6 +78,7 @@ static void serial_close(serial_t *h)
 {
 	serial_flush(h);
 	tcsetattr(h->fd, TCSANOW, &h->oldtio);
+	lockf(h->fd, F_ULOCK, 0);
 	close(h->fd);
 	free(h);
 }
@@ -129,8 +144,8 @@ static port_err_t serial_setup(serial_t *h, const serial_baud_t baud,
 
 	switch (parity) {
 		case SERIAL_PARITY_NONE: port_parity = 0; break;
-		case SERIAL_PARITY_EVEN: port_parity = INPCK | PARENB; break;
-		case SERIAL_PARITY_ODD:  port_parity = INPCK | PARENB | PARODD; break;
+		case SERIAL_PARITY_EVEN: port_parity = PARENB; break;
+		case SERIAL_PARITY_ODD:  port_parity = PARENB | PARODD; break;
 
 		default:
 			return PORT_ERR_UNKNOWN;
@@ -174,9 +189,11 @@ static port_err_t serial_setup(serial_t *h, const serial_baud_t baud,
 		port_stop	|
 		CLOCAL		|
 		CREAD;
+	if ( port_parity != 0 )
+		h->newtio.c_iflag |= INPCK;
 
 	h->newtio.c_cc[VMIN] = 0;
-	h->newtio.c_cc[VTIME] = 5;	/* in units of 0.1 s */
+	h->newtio.c_cc[VTIME] = TERMIOS_TIMEOUT;	/* in units of 0.1 s */
 
 	/* set the settings */
 	serial_flush(h);
@@ -344,11 +361,24 @@ static const char *serial_posix_get_cfg_str(struct port_interface *port)
 	return h ? h->setup_str : "INVALID";
 }
 
+static port_err_t serial_posix_flush(struct port_interface *port)
+{
+	serial_t *h;
+	h = (serial_t *)port->private;
+	if (h == NULL)
+		return PORT_ERR_UNKNOWN;
+
+	serial_flush(h);
+
+	return PORT_ERR_OK;
+}
+
 struct port_interface port_serial = {
 	.name	= "serial_posix",
 	.flags	= PORT_BYTE | PORT_GVR_ETX | PORT_CMD_INIT | PORT_RETRY,
 	.open	= serial_posix_open,
 	.close	= serial_posix_close,
+	.flush  = serial_posix_flush,
 	.read	= serial_posix_read,
 	.write	= serial_posix_write,
 	.gpio	= serial_posix_gpio,

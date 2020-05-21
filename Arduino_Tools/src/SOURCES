@@ -1,6 +1,7 @@
-github.com/stm32duino/Arduino_Tools.git
-github.com/rogerclarkmelbourne/Arduino_STM32
-git.code.sf.net/p/dfu-util/dfu-util
-https://sourceforge.net/projects/stm32flash git.code.sf.net/p/stm32flash
-github.com/texane/stlink.git
-github.com/Serasidis/STM32_HID_Bootloader.git hid-flash
+https://github.com/stm32duino/Arduino_Tools.git
+https://github.com/rogerclarkmelbourne/Arduino_STM32
+
+https://git.code.sf.net/p/dfu-util/dfu-util
+https://sourceforge.net/projects/stm32flash https://git.code.sf.net/p/stm32flash/code
+https://github.com/texane/stlink.git
+https://github.com/Serasidis/STM32_HID_Bootloader.git hid-flash

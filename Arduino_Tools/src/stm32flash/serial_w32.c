@@ -27,6 +27,7 @@
 #include <windows.h>
 #include <ctype.h>
 
+#include "compiler.h"
 #include "serial.h"
 #include "port.h"
 
@@ -88,7 +89,7 @@ static serial_t *serial_open(const char *device)
 	return h;
 }
 
-static void serial_flush(const serial_t *h)
+static void serial_flush(const serial_t __unused *h)
 {
 	/* We shouldn't need to flush in non-overlapping (blocking) mode */
 	/* tcflush(h->fd, TCIFLUSH); */
@@ -257,8 +258,6 @@ static port_err_t serial_w32_read(struct port_interface *port, void *buf,
 		ReadFile(h->fd, pos, nbyte, &r, NULL);
 		if (r == 0)
 			return PORT_ERR_TIMEDOUT;
-		if (r < 0)
-			return PORT_ERR_UNKNOWN;
 
 		nbyte -= r;
 		pos += r;
@@ -337,11 +336,24 @@ static const char *serial_w32_get_cfg_str(struct port_interface *port)
 	return h ? h->setup_str : "INVALID";
 }
 
+static port_err_t serial_w32_flush(struct port_interface *port)
+{
+	serial_t *h;
+	h = (serial_t *)port->private;
+	if (h == NULL)
+		return PORT_ERR_UNKNOWN;
+
+	serial_flush(h);
+
+	return PORT_ERR_OK;
+}
+
 struct port_interface port_serial = {
 	.name	= "serial_w32",
 	.flags	= PORT_BYTE | PORT_GVR_ETX | PORT_CMD_INIT | PORT_RETRY,
 	.open	= serial_w32_open,
 	.close	= serial_w32_close,
+	.flush  = serial_w32_flush,
 	.read	= serial_w32_read,
 	.write	= serial_w32_write,
 	.gpio	= serial_w32_gpio,

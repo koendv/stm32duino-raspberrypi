@@ -9,7 +9,7 @@
  *
  * Copyright 2007-2008 Harald Welte <laforge@gnumonks.org>
  * Copyright 2013 Hans Petter Selasky <hps@bitfrost.no>
- * Copyright 2014 Tormod Volden <debian.tormod@gmail.com>
+ * Copyright 2014-2016 Tormod Volden <debian.tormod@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,38 +51,39 @@ int dfuload_do_upload(struct dfu_if *dif, int xfer_size,
 	buf = dfu_malloc(xfer_size);
 
 	printf("Copying data from DFU device to PC\n");
-	dfu_progress_bar("Upload", 0, 1);
 
 	while (1) {
 		int rc;
+		dfu_progress_bar("Upload", total_bytes, expected_size);
 		rc = dfu_upload(dif->dev_handle, dif->interface,
 		    xfer_size, transaction++, buf);
 		if (rc < 0) {
-			warnx("Error during upload");
+			warnx("\nError during upload");
 			ret = rc;
-			goto out_free;
+			break;
 		}
 
 		dfu_file_write_crc(fd, 0, buf, rc);
 		total_bytes += rc;
 
 		if (total_bytes < 0)
-			errx(EX_SOFTWARE, "Received too many bytes (wraparound)");
+			errx(EX_SOFTWARE, "\nReceived too many bytes (wraparound)");
 
 		if (rc < xfer_size) {
 			/* last block, return */
-			ret = total_bytes;
+			ret = 0;
 			break;
 		}
-		dfu_progress_bar("Upload", total_bytes, expected_size);
 	}
-	ret = 0;
-
-out_free:
-	dfu_progress_bar("Upload", total_bytes, total_bytes);
+	free(buf);
+	if (ret == 0) {
+		dfu_progress_bar("Upload", total_bytes, total_bytes);
+	} else {
+		dfu_progress_bar("Upload", total_bytes, expected_size);
+		printf("\n");
+	}
 	if (total_bytes == 0)
 		printf("\nFailed.\n");
-	free(buf);
 	if (verbose)
 		printf("Received a total of %i bytes\n", total_bytes);
 	if (expected_size != 0 && total_bytes != expected_size)
@@ -138,6 +139,8 @@ int dfuload_do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file)
 
 			/* Wait while device executes flashing */
 			milli_sleep(dst.bwPollTimeout);
+			if (verbose > 1)
+				printf("Poll timeout %i ms\n", dst.bwPollTimeout);
 
 		} while (1);
 		if (dst.bStatus != DFU_STATUS_OK) {
@@ -185,6 +188,13 @@ get_status:
 		 * can obtain the status */
 		milli_sleep(1000);
 		goto get_status;
+		break;
+	case DFU_STATE_dfuMANIFEST_WAIT_RST:
+		printf("Resetting USB to switch back to runtime mode\n");
+		ret = libusb_reset_device(dif->dev_handle);
+		if (ret < 0 && ret != LIBUSB_ERROR_NOT_FOUND) {
+			fprintf(stderr, "error resetting after download\n");
+		}
 		break;
 	case DFU_STATE_dfuIDLE:
 		break;
