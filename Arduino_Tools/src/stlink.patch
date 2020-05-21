@@ -1,0 +1,8 @@
+245,247c245,247
+<     target_link_libraries(st-flash ${STLINK_LIB_SHARED} ${SSP_LIB})
+<     target_link_libraries(st-info ${STLINK_LIB_SHARED} ${SSP_LIB})
+<     target_link_libraries(st-util ${STLINK_LIB_SHARED} ${SSP_LIB})
+---
+>     target_link_libraries(st-flash ${STLINK_LIB_STATIC} ${SSP_LIB})
+>     target_link_libraries(st-info ${STLINK_LIB_STATIC} ${SSP_LIB})
+>     target_link_libraries(st-util ${STLINK_LIB_STATIC} ${SSP_LIB})
