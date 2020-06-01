@@ -26,10 +26,13 @@ install hid-flash $TOOLDIR
 cd $SRCDIR
 
 cd stlink
+mkdir build
+cd build
+cmake ..
 make
-install build/Release/bin/st-flash $TOOLDIR
-install build/Release/bin/st-info $TOOLDIR
-install build/Release/bin/st-util $TOOLDIR
+install bin/st-flash $TOOLDIR
+install bin/st-info $TOOLDIR
+install bin/st-util $TOOLDIR
 #make clean
 cd $SRCDIR
 

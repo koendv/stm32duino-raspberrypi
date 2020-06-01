@@ -110,8 +110,9 @@ or execute (Debian-based systems only): `apt-get install gcc build-essential cma
 ### Building
 
 1. Change into the project source directory: `cd stlink`
-2. Run `make release` to create the _Release_ target
-3. Run `make debug` to create the _Debug_ target (_optional_)<br />
+2. Run `make clean` -- required by some linux variants.
+3. Run `make release` to create the _Release_ target
+4. Run `make debug` to create the _Debug_ target (_optional_)<br />
    The debug target is only necessary in order to modify the sources and to run under a debugger.
 
 The top level Makefile is just a handy wrapper for:
@@ -152,11 +153,11 @@ $ debuild -uc -us
 ### Set permissions with udev
 
 By default most distributions don't allow access to USB devices.
-Therefore make sure you install udev files which are necessary to run the tools without root permissions.
+Therefore make sure you install udev files which are necessary to run the tools without root permissions.<br />
 udev rules create devices nodes and set the group of these to `stlink`.
 
-The rules are located in the subdirectory `etc/udev/rules.d` within the sourcefolder.
-Copy them to the directory path `/etc/udev/rules.d` and subsequently reload the udev rules:
+The rules are located in the subdirectory `config/udev/rules.d` within the sourcefolder and are automatically installed along with `sudo make install` on linux.
+Afterwards it may be necessary to reload the udev rules:
 
 ```sh
 $ cp etc/udev/rules.d /etc/udev/rules.d
@@ -164,18 +165,14 @@ $ udevadm control --reload-rules
 $ udevadm trigger
 ```
 
-Udev will now create device node files `/dev/stlinkv2_XX`, `/dev/stlinkv1_XX`.
+Udev will now create device node files `/dev/stlinkv2_XX`, `/dev/stlinkv1_XX`.<br />
 You need to ensure that the group `stlink` exists and the user who is trying to access these devices is a member of this group.
 
 
-### Note on the use of STLink-v1 programmers:
+### Note on the use of STLink-v1 programmers (legacy):
 
-At the time of writing the STLink-v1 has mostly been replaced with the newer generation STLink-v2 programmers and thus is only rarely used.
-As there are some caveats as well, we recommend to use the STLink-v2 programmers if possible.
-
-To be more precise, the STLINKv1's SCSI emulation is somehow broken, so the best advice possibly is to tell your operating system to completely ignore it.
-
-Choose on of the following options _before_ connecting the device to your computer:
+As the STLINKv1's SCSI emulation is somehow broken, the best advice possibly is to tell your operating system to completely ignore it.<br />
+Choose one of the following options _before_ connecting the device to your computer:
 
 * `modprobe -r usb-storage && modprobe usb-storage quirks=483:3744:i`
 * _OR_
@@ -207,8 +204,8 @@ To do this with only one simple command, type:
     - with gcc:   `sudo brew install git gcc cmake libusb gtk+3` or
     - with clang: `sudo brew install git llvm cmake libusb gtk+3` or
 * for MacPorts:
-    - with gcc:    `sudo port install git llvm-9.0 cmake libusb gtk3` or
-    - with clang:  `sudo port install git gcc9 cmake libusb gtk3`
+    - with gcc:    `sudo port install git gcc10 cmake libusb gtk3` or
+    - with clang:  `sudo port install git llvm-10 cmake libusb gtk3`
 
 
 ### Installation

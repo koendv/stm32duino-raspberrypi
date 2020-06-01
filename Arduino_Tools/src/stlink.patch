@@ -1,8 +1,15 @@
-245,247c245,247
-<     target_link_libraries(st-flash ${STLINK_LIB_SHARED} ${SSP_LIB})
-<     target_link_libraries(st-info ${STLINK_LIB_SHARED} ${SSP_LIB})
-<     target_link_libraries(st-util ${STLINK_LIB_SHARED} ${SSP_LIB})
----
->     target_link_libraries(st-flash ${STLINK_LIB_STATIC} ${SSP_LIB})
->     target_link_libraries(st-info ${STLINK_LIB_STATIC} ${SSP_LIB})
->     target_link_libraries(st-util ${STLINK_LIB_STATIC} ${SSP_LIB})
+--- stlink/CMakeLists.txt.ORIG	2020-06-01 07:59:20.090794935 +0200
++++ stlink/CMakeLists.txt	2020-06-01 07:59:56.030142501 +0200
+@@ -240,9 +240,9 @@
+     target_link_libraries(st-info ${STLINK_LIB_STATIC} ${SSP_LIB})
+     target_link_libraries(st-util ${STLINK_LIB_STATIC} ${SSP_LIB})
+ else ()
+-    target_link_libraries(st-flash ${STLINK_LIB_SHARED} ${SSP_LIB})
+-    target_link_libraries(st-info ${STLINK_LIB_SHARED} ${SSP_LIB})
+-    target_link_libraries(st-util ${STLINK_LIB_SHARED} ${SSP_LIB})
++    target_link_libraries(st-flash ${STLINK_LIB_STATIC} ${SSP_LIB})
++    target_link_libraries(st-info ${STLINK_LIB_STATIC} ${SSP_LIB})
++    target_link_libraries(st-util ${STLINK_LIB_STATIC} ${SSP_LIB})
+ endif ()
+ 
+ install(TARGETS st-flash DESTINATION ${CMAKE_INSTALL_BINDIR})

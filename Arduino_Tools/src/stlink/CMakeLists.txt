@@ -143,7 +143,7 @@ endif ()
 set(STLINK_LIBRARY_PATH ${CMAKE_INSTALL_LIBDIR} CACHE PATH "Main library install directory")
 
 # Set the environment variable LD_LIBRARY_PATH to point to /usr/local/lib (per default).
-execute_process (COMMAND bash -c "export LD_LIBRARY_PATH="${CMAKE_INSTALL_LIBDIR}"")
+execute_process (COMMAND bash -c "export LD_LIBRARY_PATH="${CMAKE_INSTALL_LIBDIR}" ")
 
 
 ###
@@ -164,8 +164,7 @@ message(STATUS "STLINK_LIB_SHARED: ${STLINK_LIB_SHARED}")
 message(STATUS "PROJECT_VERSION_MAJOR: ${PROJECT_VERSION_MAJOR}")
 message(STATUS "VERSION: ${STLINK_SHARED_VERSION}")
 
-set_target_properties(
-        ${STLINK_LIB_SHARED} PROPERTIES
+set_target_properties(${STLINK_LIB_SHARED} PROPERTIES
         SOVERSION ${PROJECT_VERSION_MAJOR}
         VERSION ${STLINK_SHARED_VERSION}
         OUTPUT_NAME ${PROJECT_NAME}
@@ -200,8 +199,7 @@ message(STATUS "STLINK_LIB_STATIC: ${STLINK_LIB_STATIC}")
 message(STATUS "PROJECT_VERSION_MAJOR: ${PROJECT_VERSION_MAJOR}")
 message(STATUS "VERSION: ${STLINK_STATIC_VERSION}")
 
-set_target_properties(
-        ${STLINK_LIB_STATIC} PROPERTIES
+set_target_properties(${STLINK_LIB_STATIC} PROPERTIES
         SOVERSION ${PROJECT_VERSION_MAJOR}
         VERSION ${STLINK_STATIC_VERSION}
         OUTPUT_NAME ${PROJECT_NAME}
@@ -242,9 +240,9 @@ if (WIN32 OR APPLE)
     target_link_libraries(st-info ${STLINK_LIB_STATIC} ${SSP_LIB})
     target_link_libraries(st-util ${STLINK_LIB_STATIC} ${SSP_LIB})
 else ()
-    target_link_libraries(st-flash ${STLINK_LIB_STATIC} ${SSP_LIB})
-    target_link_libraries(st-info ${STLINK_LIB_STATIC} ${SSP_LIB})
-    target_link_libraries(st-util ${STLINK_LIB_STATIC} ${SSP_LIB})
+    target_link_libraries(st-flash ${STLINK_LIB_SHARED} ${SSP_LIB})
+    target_link_libraries(st-info ${STLINK_LIB_SHARED} ${SSP_LIB})
+    target_link_libraries(st-util ${STLINK_LIB_SHARED} ${SSP_LIB})
 endif ()
 
 install(TARGETS st-flash DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -257,12 +255,12 @@ install(TARGETS st-util DESTINATION ${CMAKE_INSTALL_BINDIR})
 ###
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    ## Install modprobe.d conf files / rules to /usr/local/etc/stlink (default)
-    set(STLINK_MODPROBED_DIR "${CMAKE_INSTALL_SYSCONFDIR}/${PROJECT_NAME}/modprobe.d" CACHE PATH "modprobe.d directory")
+    ## Install modprobe.d conf files to /etc/modprobe.d/ (explicitly hardcoded)
+    set(STLINK_MODPROBED_DIR "/etc/modprobe.d" CACHE PATH "modprobe.d directory")
     install(FILES ${CMAKE_SOURCE_DIR}/config/modprobe.d/stlink_v1.conf DESTINATION ${STLINK_MODPROBED_DIR})
 
-    ## Install udev rules files / rules to /usr/local/etc/stlink (default)
-    set(STLINK_UDEV_RULES_DIR "${CMAKE_INSTALL_SYSCONFDIR}/${PROJECT_NAME}/udev/rules.d" CACHE PATH "udev rules directory")
+    ## Install udev rules files to /etc/udev/rules.d/ (explicitly hardcoded)
+    set(STLINK_UDEV_RULES_DIR "/etc/udev/rules.d" CACHE PATH "udev rules directory")
     file(GLOB RULES_FILES ${CMAKE_SOURCE_DIR}/config/udev/rules.d/*.rules)
     install(FILES ${RULES_FILES} DESTINATION ${STLINK_UDEV_RULES_DIR})
 endif ()

@@ -4,7 +4,7 @@ Open source version of the STMicroelectronics STlink Tools
 [![BSD licensed](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/stlink-org/stlink.svg)](https://github.com/stlink-org/stlink/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/stlink-org/stlink/total)](https://github.com/stlink-org/stlink/releases/latest)
-![GitHub commits](https://img.shields.io/github/commits-since/stlink-org/stlink/v1.6.0/develop)
+![GitHub commits](https://img.shields.io/github/commits-since/stlink-org/stlink/v1.6.1/develop)
 ![GitHub activity](https://img.shields.io/github/commit-activity/m/stlink-org/stlink)
 ![GitHub contributors](https://img.shields.io/github/contributors/stlink-org/stlink)
 [![Linux Status](https://img.shields.io/travis/stlink-org/stlink/master?env=BADGE=linux&label=linux)](https://travis-ci.org/stlink-org/stlink)
@@ -15,16 +15,13 @@ Recent new features and bugfixes can be found in the [Changelog](CHANGELOG.md) o
 
 #### License
 
-The stlink library and tools are licensed under the **[BSD-3 License](LICENSE.md)**.<br />
-The source files **stm32l0x.s** and **stm32lx.s** found in the subdirectory `/flashloaders/`
-are licensed under the **General Public License (GPL v2+)**.
+The stlink library and tools are licensed under the **[BSD-3 License](LICENSE.md)**.
 
 
 ## Introduction
 
 STLink is an open source toolset to program and debug STM32 devices and boards manufactured by STMicroelectronics.
-It supports several so called STLINK programmer boards (and clones thereof) which use a microcontroller chip
-to translate commands from USB to JTAG/SWD. There are four generations available on the market:
+It supports several so called STLINK programmer boards (and clones thereof) which use a microcontroller chip to translate commands from USB to JTAG/SWD. There are four generations available on the market which are _all_ supported by this toolset:
 
 * **STLINK/v1** _(obsolete as of 21-11-2019)_
   - transport layer: SCSI passthru commands over USB
@@ -56,10 +53,12 @@ Currently known working combinations of programmers and targets are listed in [d
 
 Supported operating systems are listed in [version_support.md](doc/version_support.md).
 
+The `stlink` toolset continues to maintain backwards compatibility with the **STLINK/v1** programmer.<br />
+Please note that on macOS this support is limited to versions 10.13 - 10.15.
 
 ## Tutorial & HOWTO
 
-Our [tutorial.md](doc/tutorial.md) may help you along with some advanced tasks and additional info.
+Our [tutorial](doc/tutorial.md) may help you along with some advanced tasks and additional info.
 
 
 ## Installation
@@ -125,4 +124,4 @@ Here we would appreciate any help and would love to welcome new contributors who
 * Writing external memory connected to an STM32 controller (e.g Quad SPI NOR flash) ([#412](https://github.com/stlink-org/stlink/issues/412))
 * MCU hotplug ([#449](https://github.com/stlink-org/stlink/issues/449))
 * Writing options bytes (region) ([#458](https://github.com/stlink-org/stlink/issues/458))
-* Support for STLINKv3 programmer ([#820](https://github.com/stlink-org/stlink/issues/820))
+* Enhanced support for STLINKv3 programmer ([#820](https://github.com/stlink-org/stlink/issues/820))
