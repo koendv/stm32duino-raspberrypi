@@ -1,6 +1,8 @@
 # IMPORTANT!
 
-this fork is only created to quickly fix problem preventing installation on Ras Pi. No further development will be made.
+This fork is only created to quickly fix problem preventing installation on Ras Pi. No further development will be made here.
+
+
 
 # stm32duino-raspberrypi
 
