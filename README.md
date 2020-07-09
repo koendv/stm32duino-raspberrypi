@@ -1,3 +1,7 @@
+# IMPORTANT!
+
+this fork is only created to quickly fix problem preventing installation on Ras Pi. No further development will be made.
+
 # stm32duino-raspberrypi
 
 This is software for Raspberry Pi that allows you to develop Arduino sketches for STM32 arm boards (Blue Pill).
