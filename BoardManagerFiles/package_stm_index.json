@@ -1257,7 +1257,7 @@
             },
             {
               "host": "arm-linux-gnueabihf",
-              "url": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.1/xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz-linux-arm.tar.gz",
+              "url": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.1/xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz",
               "archiveFileName": "xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz",
               "checksum": "SHA-256:e77b934cdd616e68593327b09e8a17234ac56d457af571550b096729c80b3216",
               "size": "128001146"
