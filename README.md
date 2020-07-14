@@ -7,12 +7,6 @@ By itself, the [Arduino IDE](https://www.arduino.cc/en/Main/Software) does not s
 
 Start and exit the Arduino IDE. This creates the directory `~/.arduino15`  in your home directory, and the file `~/.arduino15/preferences.txt`.
 
-With the Arduino IDE **not** running, edit `.arduino15/preferences.txt`, and add the following line:
-```
-allow_insecure_packages=true
-```
-This allows the use of unsigned packages like this one. Also tick "Verbose output during upload".
-
 Start  the Arduino IDE. In *File --> Preferences --> Additional Board Manager URLs:* paste the following url:
 ```
 https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/BoardManagerFiles/package_stm_index.json
@@ -24,7 +18,7 @@ In the search field, type "STM32". Install the "STM32 Cores" board package. Inst
 
 In the Tools menu select the STM32 cores as compilation target. As an example, if using a STM32F103 Blue Pill choose *Tools->Board: -> Generic STM32F1 series* .
 
-The tools to upload firmware are installed in the tools directory, `~/.arduino15/packages/STM32/tools/STM32Tools/1.3.2/tools/linux`.
+The tools to upload firmware are installed in the tools directory, `~/.arduino15/packages/STM32/tools/STM32Tools/1.4.0/tools/linux`.
 
 Run the shell script `install.sh` in the tools directory to install udev rules and add the current user to the `dialout` group.
 
