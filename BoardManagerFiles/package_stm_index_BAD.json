@@ -1326,20 +1326,6 @@
               "archiveFileName": "xpack-arm-none-eabi-gcc-9.2.1-1.1-linux-x32.tar.gz",
               "checksum": "SHA-256:e9f4b5f3ebe7e4391e2423e4106493d7cfcdee9eee4a1f0766f1c23662093a49",
               "size": "137429272"
-            },
-            {
-              "host": "aarch64-linux-gnu",
-              "url": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.1/xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tar.gz",
-              "archiveFileName": "xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tar.gz",
-              "checksum": "SHA-256:8791f653f1fc15b004987a2b84a7c0aabd71bde11e0e68eb32846e9b1ad80986",
-              "size": "139392567"
-            },
-            {
-              "host": "arm-linux-gnueabihf",
-              "url": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.1/xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz",
-              "archiveFileName": "xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz",
-              "checksum": "SHA-256:bb4e1f6c72e32a1696edcfdec57d32ece64ac691a0363e4781db559addac7b79",
-              "size": "135866864"
             }
           ]
         },
