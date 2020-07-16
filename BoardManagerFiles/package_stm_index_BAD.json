@@ -1212,36 +1212,6 @@
               "version": "5.5.1"
             }
           ]
-        },
-        {
-          "name": "STM32 Cores",
-          "architecture": "stm32",
-          "version": "2.0.0-dev",
-          "category": "Contributed",
-          "url": "https://github.com/stm32duino/Arduino_Core_STM32/releases/download/1.9.0/STM32-1.9.0.tar.bz2",
-          "archiveFileName": "STM32-1.9.0.tar.bz2",
-          "checksum": "SHA-256:f957056523f2f3937fcbab4a7d57ec6fa513228d66b3fc10b81c74a615691c73",
-          "size": "33617865",
-          "boards": [
-            {"name": "STM32 MCU based boards"}
-          ],
-          "toolsDependencies": [
-            {
-              "packager": "STM32",
-              "name": "xpack-arm-none-eabi-gcc",
-              "version": "9.3.1-1.1"
-            },
-            {
-              "packager": "STM32",
-              "name": "STM32Tools",
-              "version": "1.4.0"
-            },
-            {
-              "packager": "STM32",
-              "name": "CMSIS",
-              "version": "5.5.1"
-            }
-          ]
         }
       ],
       "tools": [
