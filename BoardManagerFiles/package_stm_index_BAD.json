@@ -1004,7 +1004,7 @@
             {
               "packager": "STM32",
               "name": "xpack-arm-none-eabi-gcc",
-              "version": "9.2.1-1.1"
+              "version": "9.3.1-1.1"
             },
             {
               "packager": "STM32",
