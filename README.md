@@ -7,6 +7,12 @@ By itself, the [Arduino IDE](https://www.arduino.cc/en/Main/Software) does not s
 
 Start and exit the Arduino IDE. This creates the directory `~/.arduino15`  in your home directory, and the file `~/.arduino15/preferences.txt`.
 
+With the Arduino IDE **not** running, edit `.arduino15/preferences.txt`, and add the following line:
+```
+allow_insecure_packages=true
+```
+This allows the use of unsigned packages like this one. Also tick "Verbose output during upload".
+
 Start  the Arduino IDE. In *File --> Preferences --> Additional Board Manager URLs:* paste the following url:
 ```
 https://raw.githubusercontent.com/koendv/stm32duino-raspberrypi/master/BoardManagerFiles/package_stm_index.json

@@ -1,5 +1,5 @@
---- package_stm_index.json.ORIG	2020-05-21 11:30:26.468135333 +0200
-+++ package_stm_index.json	2020-05-21 13:34:50.811060193 +0200
+--- package_stm_index.json.ORIG	2020-07-16 12:31:22.667407040 +0200
++++ package_stm_index.json	2020-07-16 12:25:34.012139151 +0200
 @@ -3,7 +3,7 @@
      {
        "name": "STM32",
@@ -9,28 +9,28 @@
        "email": "",
        "help": {
          "online": "http://www.stm32duino.com/"
-@@ -1247,6 +1247,20 @@
-               "archiveFileName": "xpack-arm-none-eabi-gcc-9.2.1-1.1-linux-x32.tar.gz",
-               "checksum": "SHA-256:e9f4b5f3ebe7e4391e2423e4106493d7cfcdee9eee4a1f0766f1c23662093a49",
-               "size": "137429272"
+@@ -1277,6 +1277,20 @@
+               "archiveFileName": "xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-x32.tar.gz",
+               "checksum": "SHA-256:be98731e1bb05fd78e2ec5727f7d6c9a6f2ae548970bbd0998de7079021d8e11",
+               "size": "143131261"
 +            },
 +            {
 +              "host": "aarch64-linux-gnu",
-+              "url": "https://github.com/xpack-dev-tools/pre-releases/releases/download/v1.0/xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tar.gz",
-+              "archiveFileName": "xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm64.tar.gz",
-+              "checksum": "SHA-256:c04ff455c31d85b5e46f2be6b808fe5d8a0b98c67a9f30a1b51ff008c435e3b4",
-+              "size": "135766158"
++              "url": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.1/xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tar.gz",
++              "archiveFileName": "xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm64.tar.gz",
++              "checksum": "SHA-256:8791f653f1fc15b004987a2b84a7c0aabd71bde11e0e68eb32846e9b1ad80986",
++              "size": "139392567"
 +            },
 +            {
 +              "host": "arm-linux-gnueabihf",
-+              "url": "https://github.com/xpack-dev-tools/pre-releases/releases/download/v1.0/xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tar.gz",
-+              "archiveFileName": "xpack-arm-none-eabi-gcc-9.2.1-1.2-linux-arm.tar.gz",
-+              "checksum": "SHA-256:e77b934cdd616e68593327b09e8a17234ac56d457af571550b096729c80b3216",
-+              "size": "128001146"
++              "url": "https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v9.3.1-1.1/xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz",
++              "archiveFileName": "v9.3.1-1.1/xpack-arm-none-eabi-gcc-9.3.1-1.1-linux-arm.tar.gz",
++              "checksum": "SHA-256:bb4e1f6c72e32a1696edcfdec57d32ece64ac691a0363e4781db559addac7b79",
++              "size": "135866864"
              }
            ]
          },
-@@ -1422,6 +1436,13 @@
+@@ -1487,6 +1501,13 @@
                "size": "24351965"
              },
              {
@@ -44,7 +44,7 @@
                "host": "arm-linux-gnueabihf",
                "url": "https://github.com/stm32duino/ArduinoModule-CMSIS/releases/download/5.5.1/CMSIS-5.5.1.tar.bz2",
                "archiveFileName": "CMSIS-5.5.1.tar.bz2",
-@@ -1838,17 +1859,31 @@
+@@ -1903,17 +1924,31 @@
              },
              {
                "host": "x86_64-pc-linux-gnu",
@@ -84,7 +84,7 @@
              }
            ]
          },
-@@ -1884,6 +1919,20 @@
+@@ -1949,6 +1984,20 @@
                "archiveFileName": "STM32Tools-1.4.0-linux.tar.bz2",
                "checksum": "SHA-256:03ce112090a39ea5176b4401ec06208b8d8cccb4eb705c8f03c5aa74f3c99918",
                "size": "755585"
