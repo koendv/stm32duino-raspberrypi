@@ -1,5 +1,7 @@
 # stm32duino-raspberrypi
 
+_This software is for arduino IDE v1. I am migrating to [arduino-ide v2](https://github.com/koendv/arduino-ide-raspberrypi), also on raspberry._
+
 This is software for Raspberry Pi that allows you to develop Arduino sketches for STM32 arm boards (Blue Pill).
 
 ## Installation
